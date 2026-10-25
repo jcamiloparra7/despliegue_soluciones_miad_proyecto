@@ -1,0 +1,393 @@
+{
+  "datasets": {
+    "raw_train": {
+      "path": "/Users/juan/Documents/proyecto_despliegue_miad/data/go_emotions/raw/train-00000-of-00001.parquet",
+      "size_bytes": 24828322,
+      "rows": 211225,
+      "columns": 37,
+      "schema": [
+        {
+          "name": "text",
+          "type": "string"
+        },
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "author",
+          "type": "string"
+        },
+        {
+          "name": "subreddit",
+          "type": "string"
+        },
+        {
+          "name": "link_id",
+          "type": "string"
+        },
+        {
+          "name": "parent_id",
+          "type": "string"
+        },
+        {
+          "name": "created_utc",
+          "type": "float"
+        },
+        {
+          "name": "rater_id",
+          "type": "int32"
+        },
+        {
+          "name": "example_very_unclear",
+          "type": "bool"
+        },
+        {
+          "name": "admiration",
+          "type": "int32"
+        },
+        {
+          "name": "amusement",
+          "type": "int32"
+        },
+        {
+          "name": "anger",
+          "type": "int32"
+        },
+        {
+          "name": "annoyance",
+          "type": "int32"
+        },
+        {
+          "name": "approval",
+          "type": "int32"
+        },
+        {
+          "name": "caring",
+          "type": "int32"
+        },
+        {
+          "name": "confusion",
+          "type": "int32"
+        },
+        {
+          "name": "curiosity",
+          "type": "int32"
+        },
+        {
+          "name": "desire",
+          "type": "int32"
+        },
+        {
+          "name": "disappointment",
+          "type": "int32"
+        },
+        {
+          "name": "disapproval",
+          "type": "int32"
+        },
+        {
+          "name": "disgust",
+          "type": "int32"
+        },
+        {
+          "name": "embarrassment",
+          "type": "int32"
+        },
+        {
+          "name": "excitement",
+          "type": "int32"
+        },
+        {
+          "name": "fear",
+          "type": "int32"
+        },
+        {
+          "name": "gratitude",
+          "type": "int32"
+        },
+        {
+          "name": "grief",
+          "type": "int32"
+        },
+        {
+          "name": "joy",
+          "type": "int32"
+        },
+        {
+          "name": "love",
+          "type": "int32"
+        },
+        {
+          "name": "nervousness",
+          "type": "int32"
+        },
+        {
+          "name": "optimism",
+          "type": "int32"
+        },
+        {
+          "name": "pride",
+          "type": "int32"
+        },
+        {
+          "name": "realization",
+          "type": "int32"
+        },
+        {
+          "name": "relief",
+          "type": "int32"
+        },
+        {
+          "name": "remorse",
+          "type": "int32"
+        },
+        {
+          "name": "sadness",
+          "type": "int32"
+        },
+        {
+          "name": "surprise",
+          "type": "int32"
+        },
+        {
+          "name": "neutral",
+          "type": "int32"
+        }
+      ]
+    },
+    "simplified_train": {
+      "path": "/Users/juan/Documents/proyecto_despliegue_miad/data/go_emotions/simplified/train-00000-of-00001.parquet",
+      "size_bytes": 2767678,
+      "rows": 43410,
+      "columns": 3,
+      "schema": [
+        {
+          "name": "text",
+          "type": "string"
+        },
+        {
+          "name": "labels",
+          "type": "list<item: int64>"
+        },
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "simplified_validation": {
+      "path": "/Users/juan/Documents/proyecto_despliegue_miad/data/go_emotions/simplified/validation-00000-of-00001.parquet",
+      "size_bytes": 350063,
+      "rows": 5426,
+      "columns": 3,
+      "schema": [
+        {
+          "name": "text",
+          "type": "string"
+        },
+        {
+          "name": "labels",
+          "type": "list<item: int64>"
+        },
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    },
+    "simplified_test": {
+      "path": "/Users/juan/Documents/proyecto_despliegue_miad/data/go_emotions/simplified/test-00000-of-00001.parquet",
+      "size_bytes": 346630,
+      "rows": 5427,
+      "columns": 3,
+      "schema": [
+        {
+          "name": "text",
+          "type": "string"
+        },
+        {
+          "name": "labels",
+          "type": "list<item: int64>"
+        },
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "quality": {
+    "raw_train": {
+      "null_text_count": 0,
+      "empty_or_whitespace_text_count": 0
+    },
+    "simplified_train": {
+      "null_text_count": 0,
+      "empty_or_whitespace_text_count": 0
+    },
+    "simplified_validation": {
+      "null_text_count": 0,
+      "empty_or_whitespace_text_count": 0
+    },
+    "simplified_test": {
+      "null_text_count": 0,
+      "empty_or_whitespace_text_count": 0
+    }
+  },
+  "derived": {
+    "total_simplified_rows": 54263,
+    "total_assigned_labels": 63812,
+    "avg_labels_per_sample": 1.175976,
+    "label_counts_by_split": {
+      "train": {
+        "neutral": 14219,
+        "anger": 1567,
+        "fear": 596,
+        "annoyance": 2470,
+        "surprise": 1060,
+        "gratitude": 2662,
+        "desire": 641,
+        "optimism": 1581,
+        "admiration": 4130,
+        "confusion": 1368,
+        "amusement": 2328,
+        "approval": 2939,
+        "caring": 1087,
+        "embarrassment": 303,
+        "realization": 1110,
+        "disappointment": 1269,
+        "grief": 77,
+        "sadness": 1326,
+        "curiosity": 2191,
+        "joy": 1452,
+        "love": 2086,
+        "excitement": 853,
+        "disapproval": 2022,
+        "remorse": 545,
+        "disgust": 793,
+        "relief": 153,
+        "pride": 111,
+        "nervousness": 164
+      },
+      "validation": {
+        "neutral": 1766,
+        "approval": 397,
+        "sadness": 143,
+        "optimism": 209,
+        "gratitude": 358,
+        "anger": 195,
+        "disapproval": 292,
+        "love": 252,
+        "embarrassment": 35,
+        "realization": 127,
+        "grief": 13,
+        "amusement": 303,
+        "annoyance": 303,
+        "disappointment": 163,
+        "admiration": 488,
+        "caring": 153,
+        "curiosity": 248,
+        "remorse": 68,
+        "joy": 172,
+        "fear": 90,
+        "desire": 77,
+        "excitement": 96,
+        "confusion": 152,
+        "disgust": 97,
+        "surprise": 129,
+        "relief": 18,
+        "pride": 15,
+        "nervousness": 21
+      },
+      "test": {
+        "sadness": 156,
+        "admiration": 504,
+        "excitement": 103,
+        "gratitude": 352,
+        "neutral": 1787,
+        "remorse": 56,
+        "annoyance": 320,
+        "disapproval": 267,
+        "amusement": 264,
+        "love": 238,
+        "desire": 83,
+        "curiosity": 284,
+        "fear": 78,
+        "confusion": 153,
+        "optimism": 186,
+        "approval": 351,
+        "caring": 135,
+        "joy": 161,
+        "surprise": 141,
+        "disappointment": 151,
+        "realization": 145,
+        "anger": 198,
+        "disgust": 123,
+        "embarrassment": 37,
+        "nervousness": 23,
+        "pride": 16,
+        "relief": 11,
+        "grief": 6
+      }
+    },
+    "labels_per_sample_by_split": {
+      "train": {
+        "1": 36308,
+        "2": 6541,
+        "3": 532,
+        "4": 28,
+        "5": 1
+      },
+      "validation": {
+        "1": 4548,
+        "2": 809,
+        "3": 62,
+        "4": 7
+      },
+      "test": {
+        "1": 4590,
+        "2": 774,
+        "3": 61,
+        "4": 2
+      }
+    },
+    "label_counts_total": {
+      "neutral": 17772,
+      "anger": 1960,
+      "fear": 764,
+      "annoyance": 3093,
+      "surprise": 1330,
+      "gratitude": 3372,
+      "desire": 801,
+      "optimism": 1976,
+      "admiration": 5122,
+      "confusion": 1673,
+      "amusement": 2895,
+      "approval": 3687,
+      "caring": 1375,
+      "embarrassment": 375,
+      "realization": 1382,
+      "disappointment": 1583,
+      "grief": 96,
+      "sadness": 1625,
+      "curiosity": 2723,
+      "joy": 1785,
+      "love": 2576,
+      "excitement": 1052,
+      "disapproval": 2581,
+      "remorse": 669,
+      "disgust": 1013,
+      "relief": 182,
+      "pride": 142,
+      "nervousness": 208
+    },
+    "labels_per_sample_total": {
+      "1": 45446,
+      "2": 8124,
+      "3": 655,
+      "4": 37,
+      "5": 1
+    }
+  }
+}
