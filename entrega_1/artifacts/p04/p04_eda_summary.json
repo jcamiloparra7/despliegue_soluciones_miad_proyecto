@@ -1,0 +1,166 @@
+{
+  "split_summaries": {
+    "train": {
+      "rows": 43410,
+      "unique_ids": 43410,
+      "duplicate_ids": 0,
+      "avg_labels_per_sample": 1.177217,
+      "median_labels_per_sample": 1.0,
+      "max_labels_per_sample": 5,
+      "text_stats": {
+        "char_len_mean": 68.4009,
+        "char_len_median": 65.0,
+        "char_len_p95": 131.0,
+        "char_len_min": 2,
+        "char_len_max": 703,
+        "word_len_mean": 12.8402,
+        "word_len_median": 12.0,
+        "word_len_p95": 24.0,
+        "word_len_min": 1,
+        "word_len_max": 33
+      }
+    },
+    "validation": {
+      "rows": 5426,
+      "unique_ids": 5426,
+      "duplicate_ids": 0,
+      "avg_labels_per_sample": 1.17582,
+      "median_labels_per_sample": 1.0,
+      "max_labels_per_sample": 4,
+      "text_stats": {
+        "char_len_mean": 68.2438,
+        "char_len_median": 64.0,
+        "char_len_p95": 133.0,
+        "char_len_min": 5,
+        "char_len_max": 187,
+        "word_len_mean": 12.7906,
+        "word_len_median": 12.0,
+        "word_len_p95": 24.75,
+        "word_len_min": 1,
+        "word_len_max": 30
+      }
+    },
+    "test": {
+      "rows": 5427,
+      "unique_ids": 5427,
+      "duplicate_ids": 0,
+      "avg_labels_per_sample": 1.166206,
+      "median_labels_per_sample": 1,
+      "max_labels_per_sample": 4,
+      "text_stats": {
+        "char_len_mean": 67.8248,
+        "char_len_median": 65,
+        "char_len_p95": 132.0,
+        "char_len_min": 5,
+        "char_len_max": 184,
+        "word_len_mean": 12.726,
+        "word_len_median": 12,
+        "word_len_p95": 24.0,
+        "word_len_min": 1,
+        "word_len_max": 32
+      }
+    }
+  },
+  "id_overlap": {
+    "train_validation_overlap": 0,
+    "train_test_overlap": 0,
+    "validation_test_overlap": 0
+  },
+  "total_simplified_rows": 54263,
+  "total_assigned_labels": 63812,
+  "avg_labels_per_sample_global": 1.175976,
+  "top_10_emotions_by_count": [
+    {
+      "emotion": "neutral",
+      "count": 17772
+    },
+    {
+      "emotion": "admiration",
+      "count": 5122
+    },
+    {
+      "emotion": "approval",
+      "count": 3687
+    },
+    {
+      "emotion": "gratitude",
+      "count": 3372
+    },
+    {
+      "emotion": "annoyance",
+      "count": 3093
+    },
+    {
+      "emotion": "amusement",
+      "count": 2895
+    },
+    {
+      "emotion": "curiosity",
+      "count": 2723
+    },
+    {
+      "emotion": "disapproval",
+      "count": 2581
+    },
+    {
+      "emotion": "love",
+      "count": 2576
+    },
+    {
+      "emotion": "optimism",
+      "count": 1976
+    }
+  ],
+  "top_10_label_cooccurrence_pairs": [
+    {
+      "emotion_a": "anger",
+      "emotion_b": "annoyance",
+      "cooccurrence_count": 348
+    },
+    {
+      "emotion_a": "admiration",
+      "emotion_b": "gratitude",
+      "cooccurrence_count": 341
+    },
+    {
+      "emotion_a": "admiration",
+      "emotion_b": "approval",
+      "cooccurrence_count": 298
+    },
+    {
+      "emotion_a": "approval",
+      "emotion_b": "neutral",
+      "cooccurrence_count": 258
+    },
+    {
+      "emotion_a": "confusion",
+      "emotion_b": "curiosity",
+      "cooccurrence_count": 253
+    },
+    {
+      "emotion_a": "admiration",
+      "emotion_b": "love",
+      "cooccurrence_count": 236
+    },
+    {
+      "emotion_a": "annoyance",
+      "emotion_b": "disapproval",
+      "cooccurrence_count": 222
+    },
+    {
+      "emotion_a": "annoyance",
+      "emotion_b": "neutral",
+      "cooccurrence_count": 177
+    },
+    {
+      "emotion_a": "disappointment",
+      "emotion_b": "sadness",
+      "cooccurrence_count": 163
+    },
+    {
+      "emotion_a": "curiosity",
+      "emotion_b": "neutral",
+      "cooccurrence_count": 162
+    }
+  ]
+}

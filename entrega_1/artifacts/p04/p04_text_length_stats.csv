@@ -1,0 +1,4 @@
+split,rows,avg_labels_per_sample,char_len_mean,char_len_median,char_len_p95,word_len_mean,word_len_median,word_len_p95,duplicate_ids
+train,43410,1.177217,68.4009,65.0,131.0,12.8402,12.0,24.0,0
+validation,5426,1.17582,68.2438,64.0,133.0,12.7906,12.0,24.75,0
+test,5427,1.166206,67.8248,65,132.0,12.726,12,24.0,0
