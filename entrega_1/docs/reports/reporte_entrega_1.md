@@ -153,16 +153,7 @@ Incluye:
 - transferibilidad limitada a contextos distintos del entrenamiento,
 - salida del modelo como señal auxiliar y no diagnostica.
 
-## 9. Conclusiones y siguientes pasos
+## 9. Siguientes pasos
 
-1. El problema de negocio y su alcance quedaron formalmente definidos.
-2. Los datos estan habilitados y caracterizados con evidencia reproducible.
-3. La exploracion confirma viabilidad tecnica del enfoque multietiqueta.
-4. El baseline ofrece una referencia inicial util para iteracion.
-5. El mockup conecta de forma clara modelo, API y dashboard de exploracion.
-
-Siguientes pasos tecnicos recomendados:
-
-- calibracion de umbral por clase,
-- comparacion contra baseline basado en Transformer,
-- validacion funcional del flujo API + dashboard, y evaluacion con consumidores externos del servicio.
+1. crear un mvp de la api de identificacion de emociones reutilizando el modelo baseline multietiqueta ya entrenado como motor de inferencia;
+2. crear los mockups de dashboards para exploracion de metricas, distribucion de emociones y monitoreo de confianza de prediccion.
