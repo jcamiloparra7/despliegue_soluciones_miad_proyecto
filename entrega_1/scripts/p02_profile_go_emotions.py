@@ -113,6 +113,16 @@ def main() -> None:
 
     profile = {"datasets": {}, "quality": {}, "derived": {}}
 
+    missing_files = [
+    str(path) for path in datasets.values() if not path.is_file()
+]
+
+    if missing_files:
+        raise FileNotFoundError(
+            "No se encontraron los siguientes archivos de GoEmotions:\n"
+            + "\n".join(missing_files)
+        )
+
     for name, path in datasets.items():
         profile["datasets"][name] = summarize_parquet(path)
         profile["quality"][name] = count_text_quality(path)
