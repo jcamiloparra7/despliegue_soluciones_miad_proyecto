@@ -1,159 +1,174 @@
-# Entrega 1 - Proyecto de despliegue de solucion analitica
+# ENTREGA 1: Despliegue de Soluciones
 
-## 1. Problema y contexto
+## 1. PROBLEMA Y CONTEXTO
 
-Los sistemas conversacionales modernos suelen responder correctamente al contenido de una consulta, pero no siempre ajustan su tono segun el estado emocional del usuario. En escenarios de soporte, atencion o acompanamiento, esto puede traducirse en respuestas percibidas como frias, poco empaticas o inadecuadas.
+En la interacción humano-máquina a través de canales digitales, los sistemas conversacionales automatizados conocidos como chatbots, resuelven eficazmente consultas funcionales o transaccionales. Sin embargo, presentan una limitación crítica: no pueden comprender el estado emocional del interlocutor. La incapacidad de modular el tono, la urgencia y el estilo de respuesta ante la frustración, la confusión, el entusiasmo o la gratitud del usuario genera interacciones percibidas como impersonales, rígidas y desarticuladas del contexto humano.
 
-Este proyecto propone abordar esa brecha mediante una API de identificacion de emociones en texto y un dashboard de exploracion de metricas, orientados al caso de uso de calibracion de respuesta en chatbots en idioma ingles.
+En entornos de soporte técnico, gestión de clientes y servicios de asistencia, una respuesta desalineada emocionalmente genera consecuencias tangibles: incrementa la fricción y el descontento del usuario ante respuestas estándar en momentos de frustración, fuerza el escalamiento innecesario a canales humanos aumentando los costos operativos, y eleva la tasa de abandono debido a la falta de contención y empatía en puntos críticos de la interacción.
 
-La propuesta se alinea con el objetivo del curso de construir un prototipo funcional de producto basado en datos, integrando componente descriptivo (exploracion), componente predictivo (modelo supervisado) y diseno de servicio (API + mockup de tablero).
+Los métodos tradicionales de análisis de texto basados en diccionarios de palabras clave o reglas heurísticas fracasan al intentar descifrar emociones sutiles en lenguaje informal; no consideran la ambigüedad, el contexto semántico, ni la coexistencia de estados anímicos superpuestos.
 
-## 2. Pregunta de negocio y alcance
+Para resolver esta brecha se requiere un modelo predictivo supervisado de clasificación multietiqueta. Este enfoque permite inferir probabilísticamente la presencia de un espectro granular de emociones a partir de representaciones densas del texto, entregando puntuaciones de confianza por categoría. Dicha salida estructurada es la única que permite a los motores de diálogo ejecutar reglas de decisión de manera robusta y en tiempo real.
 
-### 2.1 Pregunta principal
+---
 
-**¿Como puede un chatbot en ingles ajustar su tono y estrategia de respuesta usando una API de identificacion de emociones sobre el texto de entrada para mejorar la adecuacion emocional de la interaccion?**
+## 2. PREGUNTA DE NEGOCIO Y ALCANCE DEL PROYECTO
 
-### 2.2 Alcance del MVP
+> **¿De qué manera un servicio API de clasificación supervisada multietiqueta de emociones en textos en inglés puede identificar los estados emocionales de los usuarios y proporcionar información que facilite la adaptación del tono y la estrategia de respuesta de un chatbot?**
 
-Incluye:
+### Articulación de la solución:
+* **Componente predictivo (API):** Resuelve la pregunta operacional clasificando el texto entrante en tiempo real y retornando las probabilidades por categoría para calibrar la respuesta del chatbot.
+* **Componente descriptivo (Dashboard):** Resuelve la dimensión estratégica permitiendo auditar la distribución histórica de emociones, identificar fricciones recurrentes y monitorear la confiabilidad del modelo en producción.
 
-- inferencia emocional sobre texto en ingles,
-- salida multietiqueta con puntajes de confianza,
-- dashboard para visualizacion de metricas y distribuciones.
+### Componentes incluidos:
+* Procesamiento de texto no estructurado en idioma inglés proveniente de mensajes directos de usuarios.
+* Clasificador multietiqueta que estima probabilidades sobre un catálogo granular de emociones y la categoría neutral.
+* Endpoint empaquetado que recibe cargas útiles en JSON y devuelve las emociones predichas con sus respectivos puntajes de confianza.
+* Interfaz para visualizaciones descriptivas y un módulo de pruebas ad-hoc que consume la API en tiempo real.
+* Contenedorización integral con Docker (API y tablero), control de versiones de código mediante Git y versionado de datos y artefactos con DVC.
 
-No incluye:
+### Componentes excluidos:
+* Restringido exclusivamente al inglés, no se admiten otros idiomas.
+* Sin soporte para audio, señales de voz, imágenes o expresiones faciales.
+* Excluye la generación de lenguaje natural (NLG) y la gestión integral del diálogo del chatbot.
+* No ofrece diagnósticos psicológicos ni aplicaciones en el ámbito de la salud mental.
+* Sin garantías de desempeño ante léxico técnico o dominios cerrados ajenos al conjunto de entrenamiento.
 
-- multilenguaje,
-- modalidades no textuales (audio/video),
-- implementacion de chatbot completo,
-- diagnostico psicologico/clinico,
-- garantias de desempeno fuera del dominio de entrenamiento.
+---
 
-## 3. Conjuntos de datos a emplear
+## 3. CONJUNTOS DE DATOS A EMPLEAR
 
-Dataset base: **GoEmotions**.
+Para el desarrollo del prototipo se emplea el conjunto de datos de referencia **GoEmotions** (Google Research), el cual recopila comentarios de Reddit anotados manualmente sobre una taxonomía granular de 27 categorías emocionales más una etiqueta neutral. Los datos cuentan con disponibilidad inmediata a través del ecosistema de *Hugging Face Datasets* y repositorios abiertos, facilitando su gobierno y versionado mediante DVC. 
 
-- Configuracion `simplified` (principal): `train`, `validation`, `test`.
-- Configuracion `raw` (complementaria): analisis de estructura y contexto de anotacion.
+Se gestionan dos configuraciones del conjunto de datos:
+1. **Configuración `simplified`:** Contiene las instancias filtradas donde existe consenso entre anotadores (al menos dos coincidencias). Es la fuente directa para el entrenamiento, validación y prueba de los modelos supervisados. 
+2. **Configuración `raw`:** Registra las 211,225 anotaciones individuales desagregadas por evaluador, con metadatos contextuales y enlaces a identificadores de Reddit. Se emplea para auditoría de calidad, análisis de concordancia inter-anotador y evaluación de casos límite. 
 
-### 3.1 Resumen estructural
+El particionamiento oficial adoptado para el prototipo garantiza la reproducibilidad experimental:
 
-| Dataset / split | Filas | Columnas | Tamano aprox. |
-|---|---:|---:|---:|
-| `raw/train` | 211,225 | 37 | 24 MB |
-| `simplified/train` | 43,410 | 3 | 2.6 MB |
-| `simplified/validation` | 5,426 | 3 | 342 KB |
-| `simplified/test` | 5,427 | 3 | 339 KB |
+| Configuración / Partición | Registros | Variables | Tamaño aprox. | Propósito en el proyecto |
+| :--- | ---: | ---: | ---: | :--- |
+| `raw/train` | 211,225 | 37 | 24.0 MB | Contexto de anotación y auditoría de consenso. |
+| `simplified/train` | 43,410 | 3 | 2.6 MB | Entrenamiento del modelo supervisado. |
+| `simplified/validation` | 5,426 | 3 | 342 KB | Calibración de umbral y selección de hiperparámetros. |
+| `simplified/test` | 5,427 | 3 | 339 KB | Evaluación final ciega de rendimiento. |
 
-Hallazgos clave:
+**Atributos clave del conjunto simplificado:**
+* `text` (string): Contenido textual del mensaje del usuario (en inglés).
+* `labels` (list[int]): Vector de índices de las emociones asignadas por consenso.
+* `id` (string): Identificador unívoco del comentario original de Reddit.
 
-- muestras consolidadas (`simplified`): 54,263
-- etiquetas asignadas: 63,812
-- promedio etiquetas por muestra: 1.176
-- integridad textual basica: sin nulos y sin vacios en los splits analizados.
+En la configuración `simplified`, el conjunto consolidado suma **54,263 muestras** que contienen **63,812 asignaciones de etiquetas**, lo que representa un promedio de 1.176 etiquetas por texto. Las tres particiones presentan integridad total: sin valores nulos, registros corruptos ni cadenas vacías. 
 
-## 4. Exploracion de datos
+---
 
-### 4.1 Integridad de particiones
+## 4. REPOSITORIO GIT EN USO PARA EL CÓDIGO
 
-- sin duplicados por ID dentro de cada split,
-- sin solapamiento de IDs entre train/validation/test.
+![Evidencia Repositorio Git](https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto/assets/IMAGE_PLACEHOLDER_1)
+*Enlace:* [https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto/tree/main](https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto/tree/main)
 
-### 4.2 Perfil de texto
+---
 
-Comentarios cortos con comportamiento estable entre splits:
+## 5. REPOSITORIO DVC EN USO PARA LOS DATOS
 
-- longitud media en caracteres ~68,
-- longitud media en palabras ~12.8.
+![Evidencia DVC 1](https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto/assets/IMAGE_PLACEHOLDER_2)
+![Evidencia DVC 2](https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto/assets/IMAGE_PLACEHOLDER_3)
+![Evidencia DVC 3](https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto/assets/IMAGE_PLACEHOLDER_4)
 
-### 4.3 Distribucion emocional
+---
 
-Emociones mas frecuentes (global):
+## 6. EXPLORACIÓN DE LOS DATOS 
 
-1. `neutral` (17,772)
-2. `admiration` (5,122)
-3. `approval` (3,687)
-4. `gratitude` (3,372)
-5. `annoyance` (3,093)
+### Integridad de particiones y perfil del texto
+La validación de consistencia confirmó la ausencia de identificadores duplicados al interior de cada conjunto y una intersección nula entre las particiones de entrenamiento, validación y prueba, garantizando la inexistencia de *data leakage*. Los textos presentan un comportamiento altamente homogéneo y estable entre divisiones, con una longitud media de 68 caracteres y 12.8 palabras. 
 
-Emociones raras: `grief`, `pride`, `relief`, `nervousness`.
+### Desbalance de clases y multietiquetas
+La distribución de etiquetas evidencia un marcado desbalance natural en las interacciones cotidianas. La categoría predominante es `neutral` (17,772 instancias), seguida por expresiones positivas frecuentes como `admiration` (5,122), `approval` (3,687) y `gratitude` (3,372), y una presencia significativa de malestar mediante `annoyance` (3,093). En contraste, categorías críticas de cola larga como `grief`, `pride`, `relief` y `nervousness` cuentan con un volumen sustancialmente menor. Desde la perspectiva de negocio, aunque las emociones negativas asociadas a fricción representen un porcentaje inferior, constituyen los momentos decisivos donde el chatbot debe ajustar su tono o derivar el caso a un agente humano.
 
-### 4.4 Co-ocurrencias relevantes
+![Frecuencia de Emociones](https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto/assets/IMAGE_PLACEHOLDER_5)
 
-Pares frecuentes:
+Por otra parte, el análisis de co-ocurrencias reveló solapamientos semánticos recurrentes en pares como `anger` + `annoyance`, `admiration` + `gratitude` y `admiration` + `approval`. Esta coexistencia comprueba que los usuarios proyectan estados anímicos superpuestos, lo que descarta el uso de esquemas monoclase mutuamente excluyentes y confirma la necesidad técnica de un enfoque de clasificación multietiqueta supervisada.
 
-- `anger` + `annoyance`
-- `admiration` + `gratitude`
-- `admiration` + `approval`
+![Heatmap de Coocurrencia](https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto/assets/IMAGE_PLACEHOLDER_6)
 
-Interpretacion: la tarea requiere enfoque multietiqueta real, no solo monoclase.
+### Línea base predictiva inicial
+Se implementó un pipeline supervisado lineal sobre representaciones léxicas antes de abordar arquitecturas neuronales más complejas. 
+El modelo base utiliza una representación TF-IDF con extracción de unigramas y bigramas, acoplada a una estrategia *One-vs-Rest* con un clasificador lineal. Dado el desbalance de las clases, se ejecutó una búsqueda en cuadrícula sobre el conjunto de validación para calibrar un umbral de decisión global, encontrando el punto óptimo en **0.20**, el cual favorece la recuperación de categorías minoritarias frente al corte estándar de 0.50 y alcanza un F1 micro de 0.5516.
 
-## 5. Baseline predictivo inicial
+**Desempeño del Baseline Inicial (TF-IDF + SGDClassifier, Umbral 0.20):**
 
-Se implemento un baseline reproducible:
+| Partición | F1 micro | F1 macro | F1 weighted | Precisión micro | Sensibilidad micro |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Validación** | 0.5516 | 0.4066 | 0.5203 | 0.5239 | 0.5823 |
+| **Prueba (Test)** | **0.5552** | **0.4124** | **0.5259** | **0.5221** | **0.5927** |
 
-- TF-IDF (unigramas y bigramas),
-- One-vs-Rest con `SGDClassifier (log_loss)`,
-- seleccion de umbral global sobre validacion.
+![F1 por emoción en test](https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto/assets/IMAGE_PLACEHOLDER_7)
 
-### 5.1 Umbral seleccionado
+---
 
-- umbral optimo: **0.20**
-- mejor `f1_micro` en validacion: **0.551555**
+## 7. MAQUETA MOCKUP DEL PROTOTIPO 
 
-### 5.2 Metricas agregadas
+El prototipo busca facilitar la interpretación del estado emocional del usuario y proporcionar información que permita adaptar el tono y la estrategia de respuesta de un chatbot.
 
-| Split | F1 micro | F1 macro | F1 weighted | Precision micro | Recall micro |
-|---|---:|---:|---:|---:|---:|
-| validation | 0.551555 | 0.406550 | 0.520298 | 0.523904 | 0.582288 |
-| test | 0.555169 | 0.412434 | 0.525910 | 0.522133 | 0.592669 |
+### SERVICIO DE INFERENCIA (API REST)
+El servicio ejecuta inferencia multietiqueta simultánea para todas las clases que superen el umbral óptimo de 0.20, en caso de que ninguna lo alcance, asigna la categoría neutral o activa una bandera de baja certeza, operando empaquetado en una imagen Docker independiente para garantizar portabilidad y reproducibilidad.
+* **Rol:** Microservicio desacoplado que expone el modelo supervisado multietiqueta para clasificar texto en inglés en tiempo real y retornar probabilidades por emoción.
+* **Endpoint:** `POST /v1/emotions/predict` (HTTP / JSON)
+* **Entrada (Request):**
+  ```json
+  {
+    "text": "I feel overwhelmed and I don't know what to do.", 
+    "language": "en"
+  }
+  ```
+* **Salida (Response):**
+  ```json
+  {
+    "language": "en", 
+    "predictions": [
+      {"label": "nervousness", "score": 0.71}, 
+      {"label": "fear", "score": 0.42}
+    ], 
+    "top_label": "nervousness", 
+    "model_version": "baseline_v1", 
+    "threshold_policy": "global_0.20_with_fallback"
+  }
+  ```
 
-Interpretacion:
+### DASHBOARD DE MONITOREO
+La interfaz propuesta integra cuatro componentes principales:
+1. **Exploración de datos:** presenta indicadores generales del conjunto de datos GoEmotions y visualizaciones descriptivas sobre la distribución, frecuencia y coexistencia de emociones en los mensajes.
+2. **Clasificación de emociones:** permite ingresar un mensaje en inglés y enviarlo a una API que procesa el texto mediante el modelo predictivo.
+3. **Resultados de predicción:** muestra las emociones identificadas y sus respectivos puntajes de confianza, permitiendo reconocer múltiples emociones en un mismo mensaje.
+4. **Estrategia de respuesta:** propone orientaciones sobre el tono y el enfoque de la interacción a partir de reglas predefinidas asociadas con las emociones detectadas, sin generar automáticamente respuestas conversacionales.
 
-- desempeño estable entre validacion y prueba,
-- brecha micro vs macro consistente con desbalance de clases,
-- margen claro de mejora para clases raras.
+![Mockup del Dashboard](https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto/assets/IMAGE_PLACEHOLDER_8)
 
-## 6. Maqueta (mockup) del prototipo
+El diseño se plantea inicialmente como una interfaz de una sola pantalla, con componentes modulares que facilitan su posterior implementación y su integración con la API del modelo.
+*Nota: Los valores presentados en las visualizaciones y los resultados predictivos del mockup son ilustrativos y no corresponden a resultados experimentales del modelo ni a estadísticas calculadas sobre el conjunto de datos.*
 
-Se diseno un mockup funcional del flujo:
+---
 
-`Fuente de texto -> API de emociones -> Modelo -> Dashboard de metricas`
+## 8. REPORTE DE TRABAJO EN EQUIPO
 
-Documento asociado:
+* **Distribución del esfuerzo:** Equitativa (33.3% por integrante)
+* **Periodo:** Semanas 1 a 3
 
-- `entrega_1/docs/mockups/mockup_api_dashboard_emociones.md`
+### Integrantes
 
-Incluye:
+**Juan Camilo Parra — Tech Lead**
+* Definición y liderazgo de la arquitectura funcional del prototipo, integrando el flujo entre el modelo predictivo, la API de inferencia y el tablero de visualización.
+* Toma de decisiones técnicas sobre la formulación multietiqueta supervisada, métricas de evaluación y especificaciones del servicio de inferencia.
+* Supervisión y control de coherencia metodológica de la solución, y diseño funcional de la maqueta del sistema.
 
-- flujo de componentes API + dashboard,
-- contrato de API (`POST /v1/emotions/predict`),
-- esquema de tablero para visualizacion de resultados.
+**Aleisy Johana Bareño — Project Coordinator & Documentation Lead**
+* Planificación operativa, cronograma y coordinación de actividades a lo largo de las semanas 1, 2 y 3.
+* Redacción y estructuración del planteamiento del problema, su justificación en entornos de CRM/soporte, y delimitación del alcance funcional del MVP.
+* Consolidación documental y control de calidad, garantizando el apego a la rúbrica y el cumplimiento del límite de 10 páginas.
 
-## 7. Repositorios y soportes
+**Santiago Montaño — Data & Modeling Engineer**
+* Descarga, verificación de integridad estructural y control de disponibilidad de las particiones del conjunto de datos GoEmotions (`raw` y `simplified`).
+* Desarrollo del análisis cuantitativo y descriptivo sobre textos, longitud de comentarios, frecuencias y correlación/co-ocurrencia multietiqueta.
+* Implementación y ejecución de scripts del baseline, optimización del umbral de decisión y análisis de resultados por clase y agregados (micro, macro y ponderado).
 
-### 7.1 Codigo y datos (estado documental)
-
-- Estructura de proyecto y entregables en: `entrega_1/`
-- Scripts reproducibles en: `entrega_1/scripts/`
-- Notebook integrado de analisis y modelado en: `entrega_1/notebooks/analisis_integrado_go_emotions.ipynb`
-- Resultados de ejecucion en: `entrega_1/artifacts/`
-
-### 7.2 Evidencias incluidas
-
-- Caracterizacion de datos: `artifacts/p02/`
-- Exploracion de datos: `artifacts/p04/`
-- Baseline predictivo: `artifacts/p05/`
-
-## 8. Riesgos y limitaciones
-
-- sesgo de dominio (datos de Reddit),
-- desbalance de clases,
-- transferibilidad limitada a contextos distintos del entrenamiento,
-- salida del modelo como señal auxiliar y no diagnostica.
-
-## 9. Siguientes pasos
-
-1. crear un mvp de la api de identificacion de emociones reutilizando el modelo baseline multietiqueta ya entrenado como motor de inferencia;
-2. crear los mockups de dashboards para exploracion de metricas, distribucion de emociones y monitoreo de confianza de prediccion.
+> *El equipo trabajó con separación de responsabilidades y revisiones cruzadas entre lo técnico y lo documental. La integración final se realizó con trazabilidad de archivos y resultados reproducibles, buscando consistencia entre problema de negocio, análisis descriptivo y baseline predictivo.*
