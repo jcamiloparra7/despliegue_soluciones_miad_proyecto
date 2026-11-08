@@ -742,10 +742,22 @@ elif seccion == "Monitoreo y auditoría":
             .properties(height=650)
         )
 
+        linea_umbral = (
+    alt.Chart(pd.DataFrame({"Umbral": [0.2]}))
+    .mark_rule(
+        color="#C0392B",
+        strokeDash=[6, 4],
+        strokeWidth=2
+    )
+    .encode(x="Umbral:Q")
+)
+
         st.altair_chart(
-            grafica_auditoria,
+            grafica_auditoria + linea_umbral,
             width="stretch"
         )
+
+        st.caption("Línea roja punteada: umbral de clasificación del 20 %.")
 
         st.caption(
             "Probabilidades estimadas para las 28 emociones. "
