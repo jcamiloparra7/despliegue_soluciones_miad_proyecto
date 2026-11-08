@@ -1,0 +1,13 @@
+# Archivos temporales de Python
+__pycache__/
+*.py[cod]
+
+# Entornos virtuales
+.venv/
+venv/
+
+# Archivos del sistema
+.DS_Store
+
+# Historial local de pruebas del dashboard
+entrega_2/dashboard/data/historial_inferencias.csv
