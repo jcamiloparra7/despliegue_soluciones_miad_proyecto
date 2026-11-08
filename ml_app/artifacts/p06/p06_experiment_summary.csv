@@ -1,0 +1,6 @@
+experiment_name,feature_type,model_family,selected_threshold,validation_f1_micro,validation_f1_macro,test_f1_micro,test_f1_macro,test_f1_weighted,test_precision_micro,test_recall_micro
+baseline_tfidf_sgd_logloss_alpha_1e-5,tfidf_unigram_bigram,sgd_log_loss,0.2,0.551555,0.40655,0.555169,0.412434,0.52591,0.522133,0.592669
+embeddings_logreg_l2_c_1.0,all_minilm_l6_v2_embeddings,logistic_regression_l2,0.25,0.49146,0.336951,0.502573,0.332848,0.455867,0.475982,0.532312
+embeddings_logreg_l2_c_3.0,all_minilm_l6_v2_embeddings,logistic_regression_l2,0.3,0.497541,0.352232,0.508951,0.347317,0.46186,0.497361,0.521093
+embeddings_sgd_logloss_alpha_1e-4,all_minilm_l6_v2_embeddings,sgd_log_loss,0.2,0.472559,0.283884,0.47861,0.282825,0.426622,0.431435,0.537368
+embeddings_sgd_logloss_alpha_5e-5,all_minilm_l6_v2_embeddings,sgd_log_loss,0.3,0.48621,0.278331,0.492364,0.282044,0.426336,0.493183,0.491547

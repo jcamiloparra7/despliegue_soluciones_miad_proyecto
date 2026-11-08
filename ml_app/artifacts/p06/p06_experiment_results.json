@@ -1,0 +1,636 @@
+{
+  "tracking": {
+    "mlflow_tracking_uri": "http://13.222.181.45:8050",
+    "mlflow_experiment_name": "go-emotions-multilabel"
+  },
+  "dataset": {
+    "train_rows": 43410,
+    "validation_rows": 5426,
+    "test_rows": 5427,
+    "num_classes": 28
+  },
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "recommended_primary_metric": "f1_micro",
+  "recommended_support_metric": "f1_macro",
+  "selection_note": "Use f1_micro as primary metric for model selection in this project, and monitor f1_macro to avoid regressions on minority labels.",
+  "best_experiment_by_validation_f1_micro": {
+    "experiment_name": "baseline_tfidf_sgd_logloss_alpha_1e-5",
+    "feature_type": "tfidf_unigram_bigram",
+    "model_family": "sgd_log_loss",
+    "selected_threshold": 0.2,
+    "validation_f1_micro": 0.551555,
+    "validation_f1_macro": 0.40655,
+    "test_f1_micro": 0.555169,
+    "test_f1_macro": 0.412434,
+    "test_f1_weighted": 0.52591,
+    "test_precision_micro": 0.522133,
+    "test_recall_micro": 0.592669
+  },
+  "experiments": [
+    {
+      "experiment_name": "baseline_tfidf_sgd_logloss_alpha_1e-5",
+      "feature_type": "tfidf_unigram_bigram",
+      "model_family": "sgd_log_loss",
+      "model_params": {
+        "alpha": 1e-05,
+        "max_iter": 30,
+        "tol": 0.001,
+        "random_state": 42
+      },
+      "threshold_selection": {
+        "selected_threshold": 0.20000000000000004,
+        "selection_metric": "validation f1_micro",
+        "best_validation_f1_micro": 0.5515551926360329,
+        "candidates": [
+          0.1,
+          0.15000000000000002,
+          0.20000000000000004,
+          0.25000000000000006,
+          0.30000000000000004,
+          0.3500000000000001,
+          0.40000000000000013,
+          0.4500000000000001,
+          0.5000000000000001,
+          0.5500000000000002,
+          0.6000000000000002,
+          0.6500000000000001,
+          0.7000000000000002,
+          0.7500000000000002,
+          0.8000000000000003,
+          0.8500000000000003,
+          0.9000000000000002
+        ],
+        "scan": [
+          {
+            "threshold": 0.1,
+            "validation_f1_micro": 0.5092066378722437
+          },
+          {
+            "threshold": 0.15000000000000002,
+            "validation_f1_micro": 0.5464473506808682
+          },
+          {
+            "threshold": 0.20000000000000004,
+            "validation_f1_micro": 0.5515551926360329
+          },
+          {
+            "threshold": 0.25000000000000006,
+            "validation_f1_micro": 0.5510603333594178
+          },
+          {
+            "threshold": 0.30000000000000004,
+            "validation_f1_micro": 0.5481195135701055
+          },
+          {
+            "threshold": 0.3500000000000001,
+            "validation_f1_micro": 0.5464238845144357
+          },
+          {
+            "threshold": 0.40000000000000013,
+            "validation_f1_micro": 0.5421846510856954
+          },
+          {
+            "threshold": 0.4500000000000001,
+            "validation_f1_micro": 0.5410273515677118
+          },
+          {
+            "threshold": 0.5000000000000001,
+            "validation_f1_micro": 0.5415585502636645
+          },
+          {
+            "threshold": 0.5500000000000002,
+            "validation_f1_micro": 0.5403997984209642
+          },
+          {
+            "threshold": 0.6000000000000002,
+            "validation_f1_micro": 0.5398215187742044
+          },
+          {
+            "threshold": 0.6500000000000001,
+            "validation_f1_micro": 0.5391099123398516
+          },
+          {
+            "threshold": 0.7000000000000002,
+            "validation_f1_micro": 0.5379030896505149
+          },
+          {
+            "threshold": 0.7500000000000002,
+            "validation_f1_micro": 0.5377270806928601
+          },
+          {
+            "threshold": 0.8000000000000003,
+            "validation_f1_micro": 0.5375834953918999
+          },
+          {
+            "threshold": 0.8500000000000003,
+            "validation_f1_micro": 0.53713415665708
+          },
+          {
+            "threshold": 0.9000000000000002,
+            "validation_f1_micro": 0.536990011850347
+          }
+        ]
+      },
+      "metrics": {
+        "validation": {
+          "f1_micro": 0.5515551926360329,
+          "f1_macro": 0.40655037465764216,
+          "f1_weighted": 0.520298472288753,
+          "precision_micro": 0.523903539698209,
+          "recall_micro": 0.5822884012539185
+        },
+        "test": {
+          "f1_micro": 0.5551690964256641,
+          "f1_macro": 0.41243354461042087,
+          "f1_weighted": 0.5259095371195035,
+          "precision_micro": 0.5221325167037862,
+          "recall_micro": 0.5926686680360247
+        }
+      }
+    },
+    {
+      "experiment_name": "embeddings_logreg_l2_c_1.0",
+      "feature_type": "all_minilm_l6_v2_embeddings",
+      "model_family": "logistic_regression_l2",
+      "model_params": {
+        "C": 1.0,
+        "solver": "liblinear",
+        "max_iter": 1000,
+        "random_state": 42
+      },
+      "threshold_selection": {
+        "selected_threshold": 0.25000000000000006,
+        "selection_metric": "validation f1_micro",
+        "best_validation_f1_micro": 0.49145997326600327,
+        "candidates": [
+          0.1,
+          0.15000000000000002,
+          0.20000000000000004,
+          0.25000000000000006,
+          0.30000000000000004,
+          0.3500000000000001,
+          0.40000000000000013,
+          0.4500000000000001,
+          0.5000000000000001,
+          0.5500000000000002,
+          0.6000000000000002,
+          0.6500000000000001,
+          0.7000000000000002,
+          0.7500000000000002,
+          0.8000000000000003,
+          0.8500000000000003,
+          0.9000000000000002
+        ],
+        "scan": [
+          {
+            "threshold": 0.1,
+            "validation_f1_micro": 0.43421501290856834
+          },
+          {
+            "threshold": 0.15000000000000002,
+            "validation_f1_micro": 0.4729010404064844
+          },
+          {
+            "threshold": 0.20000000000000004,
+            "validation_f1_micro": 0.4909702671152922
+          },
+          {
+            "threshold": 0.25000000000000006,
+            "validation_f1_micro": 0.49145997326600327
+          },
+          {
+            "threshold": 0.30000000000000004,
+            "validation_f1_micro": 0.4908750584932148
+          },
+          {
+            "threshold": 0.3500000000000001,
+            "validation_f1_micro": 0.48982219003942395
+          },
+          {
+            "threshold": 0.40000000000000013,
+            "validation_f1_micro": 0.48787282858079317
+          },
+          {
+            "threshold": 0.4500000000000001,
+            "validation_f1_micro": 0.4865312888520514
+          },
+          {
+            "threshold": 0.5000000000000001,
+            "validation_f1_micro": 0.48593606543694184
+          },
+          {
+            "threshold": 0.5500000000000002,
+            "validation_f1_micro": 0.48477221243392904
+          },
+          {
+            "threshold": 0.6000000000000002,
+            "validation_f1_micro": 0.48325197778151824
+          },
+          {
+            "threshold": 0.6500000000000001,
+            "validation_f1_micro": 0.48228744939271256
+          },
+          {
+            "threshold": 0.7000000000000002,
+            "validation_f1_micro": 0.4820945945945946
+          },
+          {
+            "threshold": 0.7500000000000002,
+            "validation_f1_micro": 0.48161609331417465
+          },
+          {
+            "threshold": 0.8000000000000003,
+            "validation_f1_micro": 0.48117119404248115
+          },
+          {
+            "threshold": 0.8500000000000003,
+            "validation_f1_micro": 0.48077900084674
+          },
+          {
+            "threshold": 0.9000000000000002,
+            "validation_f1_micro": 0.4805216802168022
+          }
+        ]
+      },
+      "metrics": {
+        "validation": {
+          "f1_micro": 0.49145997326600327,
+          "f1_macro": 0.33695063964670025,
+          "f1_weighted": 0.4452178354208483,
+          "precision_micro": 0.4669771380186283,
+          "recall_micro": 0.5186520376175549
+        },
+        "test": {
+          "f1_micro": 0.50257328261356,
+          "f1_macro": 0.33284842836598766,
+          "f1_weighted": 0.4558672883464126,
+          "precision_micro": 0.47598191579542243,
+          "recall_micro": 0.5323115816084689
+        }
+      }
+    },
+    {
+      "experiment_name": "embeddings_logreg_l2_c_3.0",
+      "feature_type": "all_minilm_l6_v2_embeddings",
+      "model_family": "logistic_regression_l2",
+      "model_params": {
+        "C": 3.0,
+        "solver": "liblinear",
+        "max_iter": 1000,
+        "random_state": 42
+      },
+      "threshold_selection": {
+        "selected_threshold": 0.30000000000000004,
+        "selection_metric": "validation f1_micro",
+        "best_validation_f1_micro": 0.49754148740012294,
+        "candidates": [
+          0.1,
+          0.15000000000000002,
+          0.20000000000000004,
+          0.25000000000000006,
+          0.30000000000000004,
+          0.3500000000000001,
+          0.40000000000000013,
+          0.4500000000000001,
+          0.5000000000000001,
+          0.5500000000000002,
+          0.6000000000000002,
+          0.6500000000000001,
+          0.7000000000000002,
+          0.7500000000000002,
+          0.8000000000000003,
+          0.8500000000000003,
+          0.9000000000000002
+        ],
+        "scan": [
+          {
+            "threshold": 0.1,
+            "validation_f1_micro": 0.4339586153548637
+          },
+          {
+            "threshold": 0.15000000000000002,
+            "validation_f1_micro": 0.4750593824228028
+          },
+          {
+            "threshold": 0.20000000000000004,
+            "validation_f1_micro": 0.4926717762538658
+          },
+          {
+            "threshold": 0.25000000000000006,
+            "validation_f1_micro": 0.4969378827646544
+          },
+          {
+            "threshold": 0.30000000000000004,
+            "validation_f1_micro": 0.49754148740012294
+          },
+          {
+            "threshold": 0.3500000000000001,
+            "validation_f1_micro": 0.4943659736549754
+          },
+          {
+            "threshold": 0.40000000000000013,
+            "validation_f1_micro": 0.49391727493917276
+          },
+          {
+            "threshold": 0.4500000000000001,
+            "validation_f1_micro": 0.4915254237288136
+          },
+          {
+            "threshold": 0.5000000000000001,
+            "validation_f1_micro": 0.49077613428618916
+          },
+          {
+            "threshold": 0.5500000000000002,
+            "validation_f1_micro": 0.4892940782870525
+          },
+          {
+            "threshold": 0.6000000000000002,
+            "validation_f1_micro": 0.48786631959022586
+          },
+          {
+            "threshold": 0.6500000000000001,
+            "validation_f1_micro": 0.48661841440834874
+          },
+          {
+            "threshold": 0.7000000000000002,
+            "validation_f1_micro": 0.4862540057345252
+          },
+          {
+            "threshold": 0.7500000000000002,
+            "validation_f1_micro": 0.4857697829575205
+          },
+          {
+            "threshold": 0.8000000000000003,
+            "validation_f1_micro": 0.4854992813054874
+          },
+          {
+            "threshold": 0.8500000000000003,
+            "validation_f1_micro": 0.48506389100448505
+          },
+          {
+            "threshold": 0.9000000000000002,
+            "validation_f1_micro": 0.4846740050804403
+          }
+        ]
+      },
+      "metrics": {
+        "validation": {
+          "f1_micro": 0.49754148740012294,
+          "f1_macro": 0.3522320587998317,
+          "f1_weighted": 0.4506255203458969,
+          "precision_micro": 0.48794454490657024,
+          "recall_micro": 0.5075235109717868
+        },
+        "test": {
+          "f1_micro": 0.5089506172839506,
+          "f1_macro": 0.347317461912161,
+          "f1_weighted": 0.46185957403830535,
+          "precision_micro": 0.4973608807118082,
+          "recall_micro": 0.5210933796808342
+        }
+      }
+    },
+    {
+      "experiment_name": "embeddings_sgd_logloss_alpha_1e-4",
+      "feature_type": "all_minilm_l6_v2_embeddings",
+      "model_family": "sgd_log_loss",
+      "model_params": {
+        "alpha": 0.0001,
+        "max_iter": 50,
+        "tol": 0.001,
+        "random_state": 42
+      },
+      "threshold_selection": {
+        "selected_threshold": 0.20000000000000004,
+        "selection_metric": "validation f1_micro",
+        "best_validation_f1_micro": 0.47255905235858975,
+        "candidates": [
+          0.1,
+          0.15000000000000002,
+          0.20000000000000004,
+          0.25000000000000006,
+          0.30000000000000004,
+          0.3500000000000001,
+          0.40000000000000013,
+          0.4500000000000001,
+          0.5000000000000001,
+          0.5500000000000002,
+          0.6000000000000002,
+          0.6500000000000001,
+          0.7000000000000002,
+          0.7500000000000002,
+          0.8000000000000003,
+          0.8500000000000003,
+          0.9000000000000002
+        ],
+        "scan": [
+          {
+            "threshold": 0.1,
+            "validation_f1_micro": 0.4183259413041427
+          },
+          {
+            "threshold": 0.15000000000000002,
+            "validation_f1_micro": 0.4611171960569551
+          },
+          {
+            "threshold": 0.20000000000000004,
+            "validation_f1_micro": 0.47255905235858975
+          },
+          {
+            "threshold": 0.25000000000000006,
+            "validation_f1_micro": 0.4723085082203197
+          },
+          {
+            "threshold": 0.30000000000000004,
+            "validation_f1_micro": 0.46902023006743354
+          },
+          {
+            "threshold": 0.3500000000000001,
+            "validation_f1_micro": 0.46685173089484
+          },
+          {
+            "threshold": 0.40000000000000013,
+            "validation_f1_micro": 0.46500455561997844
+          },
+          {
+            "threshold": 0.4500000000000001,
+            "validation_f1_micro": 0.46445576810625677
+          },
+          {
+            "threshold": 0.5000000000000001,
+            "validation_f1_micro": 0.4637729829569306
+          },
+          {
+            "threshold": 0.5500000000000002,
+            "validation_f1_micro": 0.4633653360282971
+          },
+          {
+            "threshold": 0.6000000000000002,
+            "validation_f1_micro": 0.46240823559193317
+          },
+          {
+            "threshold": 0.6500000000000001,
+            "validation_f1_micro": 0.46157747907684504
+          },
+          {
+            "threshold": 0.7000000000000002,
+            "validation_f1_micro": 0.46125211505922165
+          },
+          {
+            "threshold": 0.7500000000000002,
+            "validation_f1_micro": 0.4610955888578444
+          },
+          {
+            "threshold": 0.8000000000000003,
+            "validation_f1_micro": 0.4609130177013636
+          },
+          {
+            "threshold": 0.8500000000000003,
+            "validation_f1_micro": 0.46095205827545316
+          },
+          {
+            "threshold": 0.9000000000000002,
+            "validation_f1_micro": 0.46095205827545316
+          }
+        ]
+      },
+      "metrics": {
+        "validation": {
+          "f1_micro": 0.47255905235858975,
+          "f1_macro": 0.2838842346105836,
+          "f1_weighted": 0.42193569888284055,
+          "precision_micro": 0.4274121972866743,
+          "recall_micro": 0.5283699059561129
+        },
+        "test": {
+          "f1_micro": 0.4786096256684492,
+          "f1_macro": 0.2828254997112856,
+          "f1_weighted": 0.42662156025158376,
+          "precision_micro": 0.4314347329696816,
+          "recall_micro": 0.5373676726181071
+        }
+      }
+    },
+    {
+      "experiment_name": "embeddings_sgd_logloss_alpha_5e-5",
+      "feature_type": "all_minilm_l6_v2_embeddings",
+      "model_family": "sgd_log_loss",
+      "model_params": {
+        "alpha": 5e-05,
+        "max_iter": 50,
+        "tol": 0.001,
+        "random_state": 42
+      },
+      "threshold_selection": {
+        "selected_threshold": 0.30000000000000004,
+        "selection_metric": "validation f1_micro",
+        "best_validation_f1_micro": 0.48621041879468846,
+        "candidates": [
+          0.1,
+          0.15000000000000002,
+          0.20000000000000004,
+          0.25000000000000006,
+          0.30000000000000004,
+          0.3500000000000001,
+          0.40000000000000013,
+          0.4500000000000001,
+          0.5000000000000001,
+          0.5500000000000002,
+          0.6000000000000002,
+          0.6500000000000001,
+          0.7000000000000002,
+          0.7500000000000002,
+          0.8000000000000003,
+          0.8500000000000003,
+          0.9000000000000002
+        ],
+        "scan": [
+          {
+            "threshold": 0.1,
+            "validation_f1_micro": 0.42987285039216644
+          },
+          {
+            "threshold": 0.15000000000000002,
+            "validation_f1_micro": 0.46952595936794583
+          },
+          {
+            "threshold": 0.20000000000000004,
+            "validation_f1_micro": 0.48139130434782607
+          },
+          {
+            "threshold": 0.25000000000000006,
+            "validation_f1_micro": 0.48493500638665565
+          },
+          {
+            "threshold": 0.30000000000000004,
+            "validation_f1_micro": 0.48621041879468846
+          },
+          {
+            "threshold": 0.3500000000000001,
+            "validation_f1_micro": 0.4836463730569948
+          },
+          {
+            "threshold": 0.40000000000000013,
+            "validation_f1_micro": 0.4812191103789127
+          },
+          {
+            "threshold": 0.4500000000000001,
+            "validation_f1_micro": 0.4802461947933128
+          },
+          {
+            "threshold": 0.5000000000000001,
+            "validation_f1_micro": 0.47977895001255966
+          },
+          {
+            "threshold": 0.5500000000000002,
+            "validation_f1_micro": 0.4787430683918669
+          },
+          {
+            "threshold": 0.6000000000000002,
+            "validation_f1_micro": 0.47770754319426884
+          },
+          {
+            "threshold": 0.6500000000000001,
+            "validation_f1_micro": 0.4766970618034448
+          },
+          {
+            "threshold": 0.7000000000000002,
+            "validation_f1_micro": 0.47629510690441984
+          },
+          {
+            "threshold": 0.7500000000000002,
+            "validation_f1_micro": 0.4759729272419628
+          },
+          {
+            "threshold": 0.8000000000000003,
+            "validation_f1_micro": 0.4756180155773789
+          },
+          {
+            "threshold": 0.8500000000000003,
+            "validation_f1_micro": 0.47518211079112316
+          },
+          {
+            "threshold": 0.9000000000000002,
+            "validation_f1_micro": 0.47518211079112316
+          }
+        ]
+      },
+      "metrics": {
+        "validation": {
+          "f1_micro": 0.48621041879468846,
+          "f1_macro": 0.27833102325337217,
+          "f1_weighted": 0.41991911149853794,
+          "precision_micro": 0.4874743973530802,
+          "recall_micro": 0.48495297805642634
+        },
+        "test": {
+          "f1_micro": 0.4923636939146949,
+          "f1_macro": 0.2820438029351279,
+          "f1_weighted": 0.4263363891614067,
+          "precision_micro": 0.4931832593532023,
+          "recall_micro": 0.4915468478432612
+        }
+      }
+    }
+  ]
+}
