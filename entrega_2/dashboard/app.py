@@ -18,7 +18,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 PROFILE_PATH = (
     PROJECT_ROOT
-    / "entrega_1"
+    / "ml_app"
     / "artifacts"
     / "p02"
     / "p02_dataset_profile.json"
@@ -34,7 +34,7 @@ def cargar_perfil():
 def cargar_distribucion():
     ruta = (
         PROJECT_ROOT
-        / "entrega_1"
+        / "ml_app"
         / "artifacts"
         / "p02"
         / "p02_emotion_distribution.csv"
@@ -46,7 +46,7 @@ def cargar_distribucion():
 def cargar_distribucion_por_particion():
     ruta = (
         PROJECT_ROOT
-        / "entrega_1"
+        / "ml_app"
         / "artifacts"
         / "p04"
         / "p04_emotion_counts_by_split.csv"
@@ -59,7 +59,7 @@ def cargar_distribucion_por_particion():
 def cargar_resultados_modelo():
     ruta = (
         PROJECT_ROOT
-        / "entrega_1"
+        / "ml_app"
         / "artifacts"
         / "p05"
         / "p05_baseline_results.json"
@@ -73,7 +73,7 @@ def cargar_resultados_modelo():
 def cargar_desempeno_por_emocion():
     ruta = (
         PROJECT_ROOT
-        / "entrega_1"
+        / "ml_app"
         / "artifacts"
         / "p05"
         / "p05_per_class_f1_test.csv"
@@ -129,7 +129,7 @@ def registrar_inferencia(texto, emociones, probabilidades, umbral):
         }),
         "umbral": umbral
     }
-
+    ruta.parent.mkdir(parents=True, exist_ok=True)
     existe = ruta.exists()
 
     with ruta.open("a", encoding="utf-8", newline="") as archivo:
