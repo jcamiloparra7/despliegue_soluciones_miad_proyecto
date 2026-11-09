@@ -1,6 +1,15 @@
 experiment_name,feature_type,model_family,selected_threshold,validation_f1_micro,validation_f1_macro,test_f1_micro,test_f1_macro,test_f1_weighted,test_precision_micro,test_recall_micro
-baseline_tfidf_sgd_logloss_alpha_1e-5,tfidf_unigram_bigram,sgd_log_loss,0.2,0.551555,0.40655,0.555169,0.412434,0.52591,0.522133,0.592669
+tfidf_baseline_simple_sgd_defaults,tfidf_unigram_bigram,sgd_log_loss,0.1,0.481307,0.307881,0.478321,0.302145,0.438056,0.408056,0.577816
+embeddings_baseline_simple_sgd_defaults,all_minilm_l6_v2_embeddings,sgd_log_loss,0.2,0.472559,0.283884,0.47861,0.282825,0.426622,0.431435,0.537368
+tfidf_logreg_l2_c_1.0,tfidf_unigram_bigram,logistic_regression_l2,0.2,0.537969,0.365564,0.536798,0.35883,0.491094,0.519834,0.554906
 embeddings_logreg_l2_c_1.0,all_minilm_l6_v2_embeddings,logistic_regression_l2,0.25,0.49146,0.336951,0.502573,0.332848,0.455867,0.475982,0.532312
+tfidf_logreg_l2_c_3.0,tfidf_unigram_bigram,logistic_regression_l2,0.2,0.553242,0.41906,0.556022,0.420559,0.528947,0.520839,0.596303
 embeddings_logreg_l2_c_3.0,all_minilm_l6_v2_embeddings,logistic_regression_l2,0.3,0.497541,0.352232,0.508951,0.347317,0.46186,0.497361,0.521093
+tfidf_sgd_logloss_alpha_1e-4,tfidf_unigram_bigram,sgd_log_loss,0.1,0.481307,0.307881,0.478321,0.302145,0.438056,0.408056,0.577816
 embeddings_sgd_logloss_alpha_1e-4,all_minilm_l6_v2_embeddings,sgd_log_loss,0.2,0.472559,0.283884,0.47861,0.282825,0.426622,0.431435,0.537368
+tfidf_sgd_logloss_alpha_5e-5,tfidf_unigram_bigram,sgd_log_loss,0.15,0.514876,0.331996,0.507628,0.315044,0.457222,0.471777,0.549376
 embeddings_sgd_logloss_alpha_5e-5,all_minilm_l6_v2_embeddings,sgd_log_loss,0.3,0.48621,0.278331,0.492364,0.282044,0.426336,0.493183,0.491547
+tfidf_calibrated_linearsvc_c_1.0,tfidf_unigram_bigram,calibrated_linear_svc,0.3,0.554081,0.425548,0.553979,0.418398,0.506905,0.55915,0.548902
+embeddings_calibrated_linearsvc_c_1.0,all_minilm_l6_v2_embeddings,calibrated_linear_svc,0.25,0.501079,0.36622,0.512529,0.366396,0.468133,0.486648,0.541318
+tfidf_calibrated_linearsvc_c_2.0,tfidf_unigram_bigram,calibrated_linear_svc,0.3,0.541434,0.402738,0.54509,0.390773,0.492605,0.553205,0.53721
+embeddings_calibrated_linearsvc_c_2.0,all_minilm_l6_v2_embeddings,calibrated_linear_svc,0.25,0.499925,0.358197,0.512248,0.359908,0.467033,0.487037,0.540212
