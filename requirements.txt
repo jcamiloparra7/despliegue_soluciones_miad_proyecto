@@ -4,3 +4,6 @@ numpy
 pyarrow
 pandas
 sentence-transformers
+streamlit
+altair
+joblib
