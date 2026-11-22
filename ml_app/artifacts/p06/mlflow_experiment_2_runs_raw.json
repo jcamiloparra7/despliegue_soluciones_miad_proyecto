@@ -1,0 +1,1566 @@
+[
+  {
+    "info": {
+      "run_uuid": "b8ec8cdda33c4bd9a44e18b65c587fa5",
+      "experiment_id": "2",
+      "run_name": "embeddings_calibrated_linearsvc_c_2.0",
+      "user_id": "juan",
+      "status": "FINISHED",
+      "start_time": 1794182597955,
+      "end_time": 1794182600878,
+      "artifact_uri": "/home/ubuntu/despliegue_soluciones_miad_proyecto/mlflow-artifacts/2/b8ec8cdda33c4bd9a44e18b65c587fa5/artifacts",
+      "lifecycle_stage": "active",
+      "run_id": "b8ec8cdda33c4bd9a44e18b65c587fa5"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "validation_f1_micro",
+          "value": 0.49992549545522275,
+          "timestamp": 1794182599854,
+          "step": 0
+        },
+        {
+          "key": "test_f1_micro",
+          "value": 0.5122481084725448,
+          "timestamp": 1794182600055,
+          "step": 0
+        },
+        {
+          "key": "test_f1_macro",
+          "value": 0.35990834875057,
+          "timestamp": 1794182600247,
+          "step": 0
+        },
+        {
+          "key": "test_precision_micro",
+          "value": 0.48703703703703705,
+          "timestamp": 1794182600448,
+          "step": 0
+        },
+        {
+          "key": "test_recall_micro",
+          "value": 0.5402117238110286,
+          "timestamp": 1794182600655,
+          "step": 0
+        }
+      ],
+      "params": [
+        {
+          "key": "feature_type",
+          "value": "all_minilm_l6_v2_embeddings"
+        },
+        {
+          "key": "model_family",
+          "value": "calibrated_linear_svc"
+        },
+        {
+          "key": "C",
+          "value": "2.0"
+        },
+        {
+          "key": "cv",
+          "value": "3"
+        },
+        {
+          "key": "random_state",
+          "value": "42"
+        },
+        {
+          "key": "selected_threshold",
+          "value": "0.25000000000000006"
+        },
+        {
+          "key": "selection_metric",
+          "value": "validation f1_micro"
+        }
+      ],
+      "tags": [
+        {
+          "key": "mlflow.user",
+          "value": "juan"
+        },
+        {
+          "key": "mlflow.source.name",
+          "value": "ml_app/scripts/p06_multilabel_experiments_mlflow.py"
+        },
+        {
+          "key": "mlflow.source.type",
+          "value": "LOCAL"
+        },
+        {
+          "key": "mlflow.source.git.commit",
+          "value": "4857d924390efd81c8a84013c9604afdcfeb9603"
+        },
+        {
+          "key": "mlflow.source.git.branch",
+          "value": "main"
+        },
+        {
+          "key": "mlflow.source.git.repoURL",
+          "value": "https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto.git"
+        },
+        {
+          "key": "mlflow.runName",
+          "value": "embeddings_calibrated_linearsvc_c_2.0"
+        }
+      ]
+    },
+    "inputs": {},
+    "outputs": {}
+  },
+  {
+    "info": {
+      "run_uuid": "e3611d65bec84d0abe0325caaf0aa99e",
+      "experiment_id": "2",
+      "run_name": "tfidf_calibrated_linearsvc_c_2.0",
+      "user_id": "juan",
+      "status": "FINISHED",
+      "start_time": 1794182539613,
+      "end_time": 1794182542361,
+      "artifact_uri": "/home/ubuntu/despliegue_soluciones_miad_proyecto/mlflow-artifacts/2/e3611d65bec84d0abe0325caaf0aa99e/artifacts",
+      "lifecycle_stage": "active",
+      "run_id": "e3611d65bec84d0abe0325caaf0aa99e"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "validation_f1_micro",
+          "value": 0.5414338176592687,
+          "timestamp": 1794182541351,
+          "step": 0
+        },
+        {
+          "key": "test_f1_micro",
+          "value": 0.5450901803607214,
+          "timestamp": 1794182541553,
+          "step": 0
+        },
+        {
+          "key": "test_f1_macro",
+          "value": 0.39077291164850714,
+          "timestamp": 1794182541760,
+          "step": 0
+        },
+        {
+          "key": "test_precision_micro",
+          "value": 0.5532053368044256,
+          "timestamp": 1794182541960,
+          "step": 0
+        },
+        {
+          "key": "test_recall_micro",
+          "value": 0.5372096697740559,
+          "timestamp": 1794182542160,
+          "step": 0
+        }
+      ],
+      "params": [
+        {
+          "key": "feature_type",
+          "value": "tfidf_unigram_bigram"
+        },
+        {
+          "key": "model_family",
+          "value": "calibrated_linear_svc"
+        },
+        {
+          "key": "C",
+          "value": "2.0"
+        },
+        {
+          "key": "cv",
+          "value": "3"
+        },
+        {
+          "key": "random_state",
+          "value": "42"
+        },
+        {
+          "key": "selected_threshold",
+          "value": "0.30000000000000004"
+        },
+        {
+          "key": "selection_metric",
+          "value": "validation f1_micro"
+        }
+      ],
+      "tags": [
+        {
+          "key": "mlflow.user",
+          "value": "juan"
+        },
+        {
+          "key": "mlflow.source.name",
+          "value": "ml_app/scripts/p06_multilabel_experiments_mlflow.py"
+        },
+        {
+          "key": "mlflow.source.type",
+          "value": "LOCAL"
+        },
+        {
+          "key": "mlflow.source.git.commit",
+          "value": "4857d924390efd81c8a84013c9604afdcfeb9603"
+        },
+        {
+          "key": "mlflow.source.git.branch",
+          "value": "main"
+        },
+        {
+          "key": "mlflow.source.git.repoURL",
+          "value": "https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto.git"
+        },
+        {
+          "key": "mlflow.runName",
+          "value": "tfidf_calibrated_linearsvc_c_2.0"
+        }
+      ]
+    },
+    "inputs": {},
+    "outputs": {}
+  },
+  {
+    "info": {
+      "run_uuid": "bed4bedb86c8456585bc8b3a8083d574",
+      "experiment_id": "2",
+      "run_name": "embeddings_calibrated_linearsvc_c_1.0",
+      "user_id": "juan",
+      "status": "FINISHED",
+      "start_time": 1794182533198,
+      "end_time": 1794182535993,
+      "artifact_uri": "/home/ubuntu/despliegue_soluciones_miad_proyecto/mlflow-artifacts/2/bed4bedb86c8456585bc8b3a8083d574/artifacts",
+      "lifecycle_stage": "active",
+      "run_id": "bed4bedb86c8456585bc8b3a8083d574"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "validation_f1_micro",
+          "value": 0.5010786282823775,
+          "timestamp": 1794182534986,
+          "step": 0
+        },
+        {
+          "key": "test_f1_micro",
+          "value": 0.512528984965218,
+          "timestamp": 1794182535187,
+          "step": 0
+        },
+        {
+          "key": "test_f1_macro",
+          "value": 0.36639607708224364,
+          "timestamp": 1794182535386,
+          "step": 0
+        },
+        {
+          "key": "test_precision_micro",
+          "value": 0.48664772727272726,
+          "timestamp": 1794182535586,
+          "step": 0
+        },
+        {
+          "key": "test_recall_micro",
+          "value": 0.5413177437193869,
+          "timestamp": 1794182535788,
+          "step": 0
+        }
+      ],
+      "params": [
+        {
+          "key": "feature_type",
+          "value": "all_minilm_l6_v2_embeddings"
+        },
+        {
+          "key": "model_family",
+          "value": "calibrated_linear_svc"
+        },
+        {
+          "key": "C",
+          "value": "1.0"
+        },
+        {
+          "key": "cv",
+          "value": "3"
+        },
+        {
+          "key": "random_state",
+          "value": "42"
+        },
+        {
+          "key": "selected_threshold",
+          "value": "0.25000000000000006"
+        },
+        {
+          "key": "selection_metric",
+          "value": "validation f1_micro"
+        }
+      ],
+      "tags": [
+        {
+          "key": "mlflow.user",
+          "value": "juan"
+        },
+        {
+          "key": "mlflow.source.name",
+          "value": "ml_app/scripts/p06_multilabel_experiments_mlflow.py"
+        },
+        {
+          "key": "mlflow.source.type",
+          "value": "LOCAL"
+        },
+        {
+          "key": "mlflow.source.git.commit",
+          "value": "4857d924390efd81c8a84013c9604afdcfeb9603"
+        },
+        {
+          "key": "mlflow.source.git.branch",
+          "value": "main"
+        },
+        {
+          "key": "mlflow.source.git.repoURL",
+          "value": "https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto.git"
+        },
+        {
+          "key": "mlflow.runName",
+          "value": "embeddings_calibrated_linearsvc_c_1.0"
+        }
+      ]
+    },
+    "inputs": {},
+    "outputs": {}
+  },
+  {
+    "info": {
+      "run_uuid": "a33608f44b244c7582cee28072c17a88",
+      "experiment_id": "2",
+      "run_name": "tfidf_calibrated_linearsvc_c_1.0",
+      "user_id": "juan",
+      "status": "FINISHED",
+      "start_time": 1794182479126,
+      "end_time": 1794182481605,
+      "artifact_uri": "/home/ubuntu/despliegue_soluciones_miad_proyecto/mlflow-artifacts/2/a33608f44b244c7582cee28072c17a88/artifacts",
+      "lifecycle_stage": "active",
+      "run_id": "a33608f44b244c7582cee28072c17a88"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "validation_f1_micro",
+          "value": 0.5540809028053724,
+          "timestamp": 1794182480649,
+          "step": 0
+        },
+        {
+          "key": "test_f1_micro",
+          "value": 0.5539786317971616,
+          "timestamp": 1794182480840,
+          "step": 0
+        },
+        {
+          "key": "test_f1_macro",
+          "value": 0.41839828090543757,
+          "timestamp": 1794182481020,
+          "step": 0
+        },
+        {
+          "key": "test_precision_micro",
+          "value": 0.5591501690004829,
+          "timestamp": 1794182481207,
+          "step": 0
+        },
+        {
+          "key": "test_recall_micro",
+          "value": 0.5489018802338442,
+          "timestamp": 1794182481407,
+          "step": 0
+        }
+      ],
+      "params": [
+        {
+          "key": "feature_type",
+          "value": "tfidf_unigram_bigram"
+        },
+        {
+          "key": "model_family",
+          "value": "calibrated_linear_svc"
+        },
+        {
+          "key": "C",
+          "value": "1.0"
+        },
+        {
+          "key": "cv",
+          "value": "3"
+        },
+        {
+          "key": "random_state",
+          "value": "42"
+        },
+        {
+          "key": "selected_threshold",
+          "value": "0.30000000000000004"
+        },
+        {
+          "key": "selection_metric",
+          "value": "validation f1_micro"
+        }
+      ],
+      "tags": [
+        {
+          "key": "mlflow.user",
+          "value": "juan"
+        },
+        {
+          "key": "mlflow.source.name",
+          "value": "ml_app/scripts/p06_multilabel_experiments_mlflow.py"
+        },
+        {
+          "key": "mlflow.source.type",
+          "value": "LOCAL"
+        },
+        {
+          "key": "mlflow.source.git.commit",
+          "value": "4857d924390efd81c8a84013c9604afdcfeb9603"
+        },
+        {
+          "key": "mlflow.source.git.branch",
+          "value": "main"
+        },
+        {
+          "key": "mlflow.source.git.repoURL",
+          "value": "https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto.git"
+        },
+        {
+          "key": "mlflow.runName",
+          "value": "tfidf_calibrated_linearsvc_c_1.0"
+        }
+      ]
+    },
+    "inputs": {},
+    "outputs": {}
+  },
+  {
+    "info": {
+      "run_uuid": "c7f7c1d572cf488bb5e433f9df185a42",
+      "experiment_id": "2",
+      "run_name": "embeddings_sgd_logloss_alpha_5e-5",
+      "user_id": "juan",
+      "status": "FINISHED",
+      "start_time": 1794182473328,
+      "end_time": 1794182476304,
+      "artifact_uri": "/home/ubuntu/despliegue_soluciones_miad_proyecto/mlflow-artifacts/2/c7f7c1d572cf488bb5e433f9df185a42/artifacts",
+      "lifecycle_stage": "active",
+      "run_id": "c7f7c1d572cf488bb5e433f9df185a42"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "validation_f1_micro",
+          "value": 0.48621041879468846,
+          "timestamp": 1794182475299,
+          "step": 0
+        },
+        {
+          "key": "test_f1_micro",
+          "value": 0.4923636939146949,
+          "timestamp": 1794182475496,
+          "step": 0
+        },
+        {
+          "key": "test_f1_macro",
+          "value": 0.2820438029351279,
+          "timestamp": 1794182475693,
+          "step": 0
+        },
+        {
+          "key": "test_precision_micro",
+          "value": 0.4931832593532023,
+          "timestamp": 1794182475894,
+          "step": 0
+        },
+        {
+          "key": "test_recall_micro",
+          "value": 0.4915468478432612,
+          "timestamp": 1794182476102,
+          "step": 0
+        }
+      ],
+      "params": [
+        {
+          "key": "feature_type",
+          "value": "all_minilm_l6_v2_embeddings"
+        },
+        {
+          "key": "model_family",
+          "value": "sgd_log_loss"
+        },
+        {
+          "key": "alpha",
+          "value": "5e-05"
+        },
+        {
+          "key": "max_iter",
+          "value": "50"
+        },
+        {
+          "key": "tol",
+          "value": "0.001"
+        },
+        {
+          "key": "random_state",
+          "value": "42"
+        },
+        {
+          "key": "selected_threshold",
+          "value": "0.30000000000000004"
+        },
+        {
+          "key": "selection_metric",
+          "value": "validation f1_micro"
+        }
+      ],
+      "tags": [
+        {
+          "key": "mlflow.user",
+          "value": "juan"
+        },
+        {
+          "key": "mlflow.source.name",
+          "value": "ml_app/scripts/p06_multilabel_experiments_mlflow.py"
+        },
+        {
+          "key": "mlflow.source.type",
+          "value": "LOCAL"
+        },
+        {
+          "key": "mlflow.source.git.commit",
+          "value": "4857d924390efd81c8a84013c9604afdcfeb9603"
+        },
+        {
+          "key": "mlflow.source.git.branch",
+          "value": "main"
+        },
+        {
+          "key": "mlflow.source.git.repoURL",
+          "value": "https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto.git"
+        },
+        {
+          "key": "mlflow.runName",
+          "value": "embeddings_sgd_logloss_alpha_5e-5"
+        }
+      ]
+    },
+    "inputs": {},
+    "outputs": {}
+  },
+  {
+    "info": {
+      "run_uuid": "5c8d9d1555bf47b7bd47b606946da629",
+      "experiment_id": "2",
+      "run_name": "tfidf_sgd_logloss_alpha_5e-5",
+      "user_id": "juan",
+      "status": "FINISHED",
+      "start_time": 1794182463891,
+      "end_time": 1794182466691,
+      "artifact_uri": "/home/ubuntu/despliegue_soluciones_miad_proyecto/mlflow-artifacts/2/5c8d9d1555bf47b7bd47b606946da629/artifacts",
+      "lifecycle_stage": "active",
+      "run_id": "5c8d9d1555bf47b7bd47b606946da629"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "validation_f1_micro",
+          "value": 0.5148759729395505,
+          "timestamp": 1794182465690,
+          "step": 0
+        },
+        {
+          "key": "test_f1_micro",
+          "value": 0.507628294036061,
+          "timestamp": 1794182465890,
+          "step": 0
+        },
+        {
+          "key": "test_f1_macro",
+          "value": 0.3150437041811135,
+          "timestamp": 1794182466089,
+          "step": 0
+        },
+        {
+          "key": "test_precision_micro",
+          "value": 0.4717774762550882,
+          "timestamp": 1794182466290,
+          "step": 0
+        },
+        {
+          "key": "test_recall_micro",
+          "value": 0.5493758887659977,
+          "timestamp": 1794182466489,
+          "step": 0
+        }
+      ],
+      "params": [
+        {
+          "key": "feature_type",
+          "value": "tfidf_unigram_bigram"
+        },
+        {
+          "key": "model_family",
+          "value": "sgd_log_loss"
+        },
+        {
+          "key": "alpha",
+          "value": "5e-05"
+        },
+        {
+          "key": "max_iter",
+          "value": "50"
+        },
+        {
+          "key": "tol",
+          "value": "0.001"
+        },
+        {
+          "key": "random_state",
+          "value": "42"
+        },
+        {
+          "key": "selected_threshold",
+          "value": "0.15000000000000002"
+        },
+        {
+          "key": "selection_metric",
+          "value": "validation f1_micro"
+        }
+      ],
+      "tags": [
+        {
+          "key": "mlflow.user",
+          "value": "juan"
+        },
+        {
+          "key": "mlflow.source.name",
+          "value": "ml_app/scripts/p06_multilabel_experiments_mlflow.py"
+        },
+        {
+          "key": "mlflow.source.type",
+          "value": "LOCAL"
+        },
+        {
+          "key": "mlflow.source.git.commit",
+          "value": "4857d924390efd81c8a84013c9604afdcfeb9603"
+        },
+        {
+          "key": "mlflow.source.git.branch",
+          "value": "main"
+        },
+        {
+          "key": "mlflow.source.git.repoURL",
+          "value": "https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto.git"
+        },
+        {
+          "key": "mlflow.runName",
+          "value": "tfidf_sgd_logloss_alpha_5e-5"
+        }
+      ]
+    },
+    "inputs": {},
+    "outputs": {}
+  },
+  {
+    "info": {
+      "run_uuid": "dd5137c0a579483b8878e994c0ba7b99",
+      "experiment_id": "2",
+      "run_name": "embeddings_sgd_logloss_alpha_1e-4",
+      "user_id": "juan",
+      "status": "FINISHED",
+      "start_time": 1794182459871,
+      "end_time": 1794182462875,
+      "artifact_uri": "/home/ubuntu/despliegue_soluciones_miad_proyecto/mlflow-artifacts/2/dd5137c0a579483b8878e994c0ba7b99/artifacts",
+      "lifecycle_stage": "active",
+      "run_id": "dd5137c0a579483b8878e994c0ba7b99"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "validation_f1_micro",
+          "value": 0.47255905235858975,
+          "timestamp": 1794182461880,
+          "step": 0
+        },
+        {
+          "key": "test_f1_micro",
+          "value": 0.4786096256684492,
+          "timestamp": 1794182462080,
+          "step": 0
+        },
+        {
+          "key": "test_f1_macro",
+          "value": 0.2828254997112856,
+          "timestamp": 1794182462279,
+          "step": 0
+        },
+        {
+          "key": "test_precision_micro",
+          "value": 0.4314347329696816,
+          "timestamp": 1794182462476,
+          "step": 0
+        },
+        {
+          "key": "test_recall_micro",
+          "value": 0.5373676726181071,
+          "timestamp": 1794182462677,
+          "step": 0
+        }
+      ],
+      "params": [
+        {
+          "key": "feature_type",
+          "value": "all_minilm_l6_v2_embeddings"
+        },
+        {
+          "key": "model_family",
+          "value": "sgd_log_loss"
+        },
+        {
+          "key": "alpha",
+          "value": "0.0001"
+        },
+        {
+          "key": "max_iter",
+          "value": "50"
+        },
+        {
+          "key": "tol",
+          "value": "0.001"
+        },
+        {
+          "key": "random_state",
+          "value": "42"
+        },
+        {
+          "key": "selected_threshold",
+          "value": "0.20000000000000004"
+        },
+        {
+          "key": "selection_metric",
+          "value": "validation f1_micro"
+        }
+      ],
+      "tags": [
+        {
+          "key": "mlflow.user",
+          "value": "juan"
+        },
+        {
+          "key": "mlflow.source.name",
+          "value": "ml_app/scripts/p06_multilabel_experiments_mlflow.py"
+        },
+        {
+          "key": "mlflow.source.type",
+          "value": "LOCAL"
+        },
+        {
+          "key": "mlflow.source.git.commit",
+          "value": "4857d924390efd81c8a84013c9604afdcfeb9603"
+        },
+        {
+          "key": "mlflow.source.git.branch",
+          "value": "main"
+        },
+        {
+          "key": "mlflow.source.git.repoURL",
+          "value": "https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto.git"
+        },
+        {
+          "key": "mlflow.runName",
+          "value": "embeddings_sgd_logloss_alpha_1e-4"
+        }
+      ]
+    },
+    "inputs": {},
+    "outputs": {}
+  },
+  {
+    "info": {
+      "run_uuid": "1c3c0f40c515414ea4565522e7ccaa6a",
+      "experiment_id": "2",
+      "run_name": "tfidf_sgd_logloss_alpha_1e-4",
+      "user_id": "juan",
+      "status": "FINISHED",
+      "start_time": 1794182450788,
+      "end_time": 1794182453666,
+      "artifact_uri": "/home/ubuntu/despliegue_soluciones_miad_proyecto/mlflow-artifacts/2/1c3c0f40c515414ea4565522e7ccaa6a/artifacts",
+      "lifecycle_stage": "active",
+      "run_id": "1c3c0f40c515414ea4565522e7ccaa6a"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "validation_f1_micro",
+          "value": 0.48130718954248364,
+          "timestamp": 1794182452629,
+          "step": 0
+        },
+        {
+          "key": "test_f1_micro",
+          "value": 0.47832058073376493,
+          "timestamp": 1794182452829,
+          "step": 0
+        },
+        {
+          "key": "test_f1_macro",
+          "value": 0.3021446079925107,
+          "timestamp": 1794182453034,
+          "step": 0
+        },
+        {
+          "key": "test_precision_micro",
+          "value": 0.4080562374469984,
+          "timestamp": 1794182453244,
+          "step": 0
+        },
+        {
+          "key": "test_recall_micro",
+          "value": 0.5778164006952126,
+          "timestamp": 1794182453462,
+          "step": 0
+        }
+      ],
+      "params": [
+        {
+          "key": "feature_type",
+          "value": "tfidf_unigram_bigram"
+        },
+        {
+          "key": "model_family",
+          "value": "sgd_log_loss"
+        },
+        {
+          "key": "alpha",
+          "value": "0.0001"
+        },
+        {
+          "key": "max_iter",
+          "value": "50"
+        },
+        {
+          "key": "tol",
+          "value": "0.001"
+        },
+        {
+          "key": "random_state",
+          "value": "42"
+        },
+        {
+          "key": "selected_threshold",
+          "value": "0.1"
+        },
+        {
+          "key": "selection_metric",
+          "value": "validation f1_micro"
+        }
+      ],
+      "tags": [
+        {
+          "key": "mlflow.user",
+          "value": "juan"
+        },
+        {
+          "key": "mlflow.source.name",
+          "value": "ml_app/scripts/p06_multilabel_experiments_mlflow.py"
+        },
+        {
+          "key": "mlflow.source.type",
+          "value": "LOCAL"
+        },
+        {
+          "key": "mlflow.source.git.commit",
+          "value": "4857d924390efd81c8a84013c9604afdcfeb9603"
+        },
+        {
+          "key": "mlflow.source.git.branch",
+          "value": "main"
+        },
+        {
+          "key": "mlflow.source.git.repoURL",
+          "value": "https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto.git"
+        },
+        {
+          "key": "mlflow.runName",
+          "value": "tfidf_sgd_logloss_alpha_1e-4"
+        }
+      ]
+    },
+    "inputs": {},
+    "outputs": {}
+  },
+  {
+    "info": {
+      "run_uuid": "e9f9d891255947eea2e52b9cd13aeed4",
+      "experiment_id": "2",
+      "run_name": "embeddings_logreg_l2_c_3.0",
+      "user_id": "juan",
+      "status": "FINISHED",
+      "start_time": 1794182446698,
+      "end_time": 1794182449794,
+      "artifact_uri": "/home/ubuntu/despliegue_soluciones_miad_proyecto/mlflow-artifacts/2/e9f9d891255947eea2e52b9cd13aeed4/artifacts",
+      "lifecycle_stage": "active",
+      "run_id": "e9f9d891255947eea2e52b9cd13aeed4"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "validation_f1_micro",
+          "value": 0.49754148740012294,
+          "timestamp": 1794182448763,
+          "step": 0
+        },
+        {
+          "key": "test_f1_micro",
+          "value": 0.5089506172839506,
+          "timestamp": 1794182448970,
+          "step": 0
+        },
+        {
+          "key": "test_f1_macro",
+          "value": 0.347317461912161,
+          "timestamp": 1794182449176,
+          "step": 0
+        },
+        {
+          "key": "test_precision_micro",
+          "value": 0.4973608807118082,
+          "timestamp": 1794182449384,
+          "step": 0
+        },
+        {
+          "key": "test_recall_micro",
+          "value": 0.5210933796808342,
+          "timestamp": 1794182449589,
+          "step": 0
+        }
+      ],
+      "params": [
+        {
+          "key": "feature_type",
+          "value": "all_minilm_l6_v2_embeddings"
+        },
+        {
+          "key": "model_family",
+          "value": "logistic_regression_l2"
+        },
+        {
+          "key": "C",
+          "value": "3.0"
+        },
+        {
+          "key": "solver",
+          "value": "liblinear"
+        },
+        {
+          "key": "max_iter",
+          "value": "1000"
+        },
+        {
+          "key": "random_state",
+          "value": "42"
+        },
+        {
+          "key": "selected_threshold",
+          "value": "0.30000000000000004"
+        },
+        {
+          "key": "selection_metric",
+          "value": "validation f1_micro"
+        }
+      ],
+      "tags": [
+        {
+          "key": "mlflow.user",
+          "value": "juan"
+        },
+        {
+          "key": "mlflow.source.name",
+          "value": "ml_app/scripts/p06_multilabel_experiments_mlflow.py"
+        },
+        {
+          "key": "mlflow.source.type",
+          "value": "LOCAL"
+        },
+        {
+          "key": "mlflow.source.git.commit",
+          "value": "4857d924390efd81c8a84013c9604afdcfeb9603"
+        },
+        {
+          "key": "mlflow.source.git.branch",
+          "value": "main"
+        },
+        {
+          "key": "mlflow.source.git.repoURL",
+          "value": "https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto.git"
+        },
+        {
+          "key": "mlflow.runName",
+          "value": "embeddings_logreg_l2_c_3.0"
+        }
+      ]
+    },
+    "inputs": {},
+    "outputs": {}
+  },
+  {
+    "info": {
+      "run_uuid": "38226443259b474faa91bff7d39bda8c",
+      "experiment_id": "2",
+      "run_name": "tfidf_logreg_l2_c_3.0",
+      "user_id": "juan",
+      "status": "FINISHED",
+      "start_time": 1794182411772,
+      "end_time": 1794182414666,
+      "artifact_uri": "/home/ubuntu/despliegue_soluciones_miad_proyecto/mlflow-artifacts/2/38226443259b474faa91bff7d39bda8c/artifacts",
+      "lifecycle_stage": "active",
+      "run_id": "38226443259b474faa91bff7d39bda8c"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "validation_f1_micro",
+          "value": 0.5532417663565204,
+          "timestamp": 1794182413661,
+          "step": 0
+        },
+        {
+          "key": "test_f1_micro",
+          "value": 0.5560220994475138,
+          "timestamp": 1794182413862,
+          "step": 0
+        },
+        {
+          "key": "test_f1_macro",
+          "value": 0.420559272811424,
+          "timestamp": 1794182414062,
+          "step": 0
+        },
+        {
+          "key": "test_precision_micro",
+          "value": 0.5208390836323489,
+          "timestamp": 1794182414261,
+          "step": 0
+        },
+        {
+          "key": "test_recall_micro",
+          "value": 0.596302733449202,
+          "timestamp": 1794182414464,
+          "step": 0
+        }
+      ],
+      "params": [
+        {
+          "key": "feature_type",
+          "value": "tfidf_unigram_bigram"
+        },
+        {
+          "key": "model_family",
+          "value": "logistic_regression_l2"
+        },
+        {
+          "key": "C",
+          "value": "3.0"
+        },
+        {
+          "key": "solver",
+          "value": "liblinear"
+        },
+        {
+          "key": "max_iter",
+          "value": "1000"
+        },
+        {
+          "key": "random_state",
+          "value": "42"
+        },
+        {
+          "key": "selected_threshold",
+          "value": "0.20000000000000004"
+        },
+        {
+          "key": "selection_metric",
+          "value": "validation f1_micro"
+        }
+      ],
+      "tags": [
+        {
+          "key": "mlflow.user",
+          "value": "juan"
+        },
+        {
+          "key": "mlflow.source.name",
+          "value": "ml_app/scripts/p06_multilabel_experiments_mlflow.py"
+        },
+        {
+          "key": "mlflow.source.type",
+          "value": "LOCAL"
+        },
+        {
+          "key": "mlflow.source.git.commit",
+          "value": "4857d924390efd81c8a84013c9604afdcfeb9603"
+        },
+        {
+          "key": "mlflow.source.git.branch",
+          "value": "main"
+        },
+        {
+          "key": "mlflow.source.git.repoURL",
+          "value": "https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto.git"
+        },
+        {
+          "key": "mlflow.runName",
+          "value": "tfidf_logreg_l2_c_3.0"
+        }
+      ]
+    },
+    "inputs": {},
+    "outputs": {}
+  },
+  {
+    "info": {
+      "run_uuid": "2d1080581daa4e2c81304f3a45831eec",
+      "experiment_id": "2",
+      "run_name": "embeddings_logreg_l2_c_1.0",
+      "user_id": "juan",
+      "status": "FINISHED",
+      "start_time": 1794182406421,
+      "end_time": 1794182409426,
+      "artifact_uri": "/home/ubuntu/despliegue_soluciones_miad_proyecto/mlflow-artifacts/2/2d1080581daa4e2c81304f3a45831eec/artifacts",
+      "lifecycle_stage": "active",
+      "run_id": "2d1080581daa4e2c81304f3a45831eec"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "validation_f1_micro",
+          "value": 0.49145997326600327,
+          "timestamp": 1794182408410,
+          "step": 0
+        },
+        {
+          "key": "test_f1_micro",
+          "value": 0.50257328261356,
+          "timestamp": 1794182408613,
+          "step": 0
+        },
+        {
+          "key": "test_f1_macro",
+          "value": 0.33284842836598766,
+          "timestamp": 1794182408813,
+          "step": 0
+        },
+        {
+          "key": "test_precision_micro",
+          "value": 0.47598191579542243,
+          "timestamp": 1794182409015,
+          "step": 0
+        },
+        {
+          "key": "test_recall_micro",
+          "value": 0.5323115816084689,
+          "timestamp": 1794182409216,
+          "step": 0
+        }
+      ],
+      "params": [
+        {
+          "key": "feature_type",
+          "value": "all_minilm_l6_v2_embeddings"
+        },
+        {
+          "key": "model_family",
+          "value": "logistic_regression_l2"
+        },
+        {
+          "key": "C",
+          "value": "1.0"
+        },
+        {
+          "key": "solver",
+          "value": "liblinear"
+        },
+        {
+          "key": "max_iter",
+          "value": "1000"
+        },
+        {
+          "key": "random_state",
+          "value": "42"
+        },
+        {
+          "key": "selected_threshold",
+          "value": "0.25000000000000006"
+        },
+        {
+          "key": "selection_metric",
+          "value": "validation f1_micro"
+        }
+      ],
+      "tags": [
+        {
+          "key": "mlflow.user",
+          "value": "juan"
+        },
+        {
+          "key": "mlflow.source.name",
+          "value": "ml_app/scripts/p06_multilabel_experiments_mlflow.py"
+        },
+        {
+          "key": "mlflow.source.type",
+          "value": "LOCAL"
+        },
+        {
+          "key": "mlflow.source.git.commit",
+          "value": "4857d924390efd81c8a84013c9604afdcfeb9603"
+        },
+        {
+          "key": "mlflow.source.git.branch",
+          "value": "main"
+        },
+        {
+          "key": "mlflow.source.git.repoURL",
+          "value": "https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto.git"
+        },
+        {
+          "key": "mlflow.runName",
+          "value": "embeddings_logreg_l2_c_1.0"
+        }
+      ]
+    },
+    "inputs": {},
+    "outputs": {}
+  },
+  {
+    "info": {
+      "run_uuid": "8e3e8d68da9a448eaf20d82157e64cef",
+      "experiment_id": "2",
+      "run_name": "tfidf_logreg_l2_c_1.0",
+      "user_id": "juan",
+      "status": "FINISHED",
+      "start_time": 1794182378201,
+      "end_time": 1794182381042,
+      "artifact_uri": "/home/ubuntu/despliegue_soluciones_miad_proyecto/mlflow-artifacts/2/8e3e8d68da9a448eaf20d82157e64cef/artifacts",
+      "lifecycle_stage": "active",
+      "run_id": "8e3e8d68da9a448eaf20d82157e64cef"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "validation_f1_micro",
+          "value": 0.5379688929551693,
+          "timestamp": 1794182380026,
+          "step": 0
+        },
+        {
+          "key": "test_f1_micro",
+          "value": 0.5367978601452045,
+          "timestamp": 1794182380229,
+          "step": 0
+        },
+        {
+          "key": "test_f1_macro",
+          "value": 0.35882996504284165,
+          "timestamp": 1794182380433,
+          "step": 0
+        },
+        {
+          "key": "test_precision_micro",
+          "value": 0.5198342214328004,
+          "timestamp": 1794182380636,
+          "step": 0
+        },
+        {
+          "key": "test_recall_micro",
+          "value": 0.5549059883077896,
+          "timestamp": 1794182380838,
+          "step": 0
+        }
+      ],
+      "params": [
+        {
+          "key": "feature_type",
+          "value": "tfidf_unigram_bigram"
+        },
+        {
+          "key": "model_family",
+          "value": "logistic_regression_l2"
+        },
+        {
+          "key": "C",
+          "value": "1.0"
+        },
+        {
+          "key": "solver",
+          "value": "liblinear"
+        },
+        {
+          "key": "max_iter",
+          "value": "1000"
+        },
+        {
+          "key": "random_state",
+          "value": "42"
+        },
+        {
+          "key": "selected_threshold",
+          "value": "0.20000000000000004"
+        },
+        {
+          "key": "selection_metric",
+          "value": "validation f1_micro"
+        }
+      ],
+      "tags": [
+        {
+          "key": "mlflow.user",
+          "value": "juan"
+        },
+        {
+          "key": "mlflow.source.name",
+          "value": "ml_app/scripts/p06_multilabel_experiments_mlflow.py"
+        },
+        {
+          "key": "mlflow.source.type",
+          "value": "LOCAL"
+        },
+        {
+          "key": "mlflow.source.git.commit",
+          "value": "4857d924390efd81c8a84013c9604afdcfeb9603"
+        },
+        {
+          "key": "mlflow.source.git.branch",
+          "value": "main"
+        },
+        {
+          "key": "mlflow.source.git.repoURL",
+          "value": "https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto.git"
+        },
+        {
+          "key": "mlflow.runName",
+          "value": "tfidf_logreg_l2_c_1.0"
+        }
+      ]
+    },
+    "inputs": {},
+    "outputs": {}
+  },
+  {
+    "info": {
+      "run_uuid": "b5b3009b95254051a799c3d3f2dc6870",
+      "experiment_id": "2",
+      "run_name": "embeddings_baseline_simple_sgd_defaults",
+      "user_id": "juan",
+      "status": "FINISHED",
+      "start_time": 1794182373607,
+      "end_time": 1794182376239,
+      "artifact_uri": "/home/ubuntu/despliegue_soluciones_miad_proyecto/mlflow-artifacts/2/b5b3009b95254051a799c3d3f2dc6870/artifacts",
+      "lifecycle_stage": "active",
+      "run_id": "b5b3009b95254051a799c3d3f2dc6870"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "validation_f1_micro",
+          "value": 0.47255905235858975,
+          "timestamp": 1794182375216,
+          "step": 0
+        },
+        {
+          "key": "test_f1_micro",
+          "value": 0.4786096256684492,
+          "timestamp": 1794182375420,
+          "step": 0
+        },
+        {
+          "key": "test_f1_macro",
+          "value": 0.2828254997112856,
+          "timestamp": 1794182375622,
+          "step": 0
+        },
+        {
+          "key": "test_precision_micro",
+          "value": 0.4314347329696816,
+          "timestamp": 1794182375828,
+          "step": 0
+        },
+        {
+          "key": "test_recall_micro",
+          "value": 0.5373676726181071,
+          "timestamp": 1794182376038,
+          "step": 0
+        }
+      ],
+      "params": [
+        {
+          "key": "feature_type",
+          "value": "all_minilm_l6_v2_embeddings"
+        },
+        {
+          "key": "model_family",
+          "value": "sgd_log_loss"
+        },
+        {
+          "key": "loss",
+          "value": "log_loss"
+        },
+        {
+          "key": "random_state",
+          "value": "42"
+        },
+        {
+          "key": "selected_threshold",
+          "value": "0.20000000000000004"
+        },
+        {
+          "key": "selection_metric",
+          "value": "validation f1_micro"
+        }
+      ],
+      "tags": [
+        {
+          "key": "mlflow.user",
+          "value": "juan"
+        },
+        {
+          "key": "mlflow.source.name",
+          "value": "ml_app/scripts/p06_multilabel_experiments_mlflow.py"
+        },
+        {
+          "key": "mlflow.source.type",
+          "value": "LOCAL"
+        },
+        {
+          "key": "mlflow.source.git.commit",
+          "value": "4857d924390efd81c8a84013c9604afdcfeb9603"
+        },
+        {
+          "key": "mlflow.source.git.branch",
+          "value": "main"
+        },
+        {
+          "key": "mlflow.source.git.repoURL",
+          "value": "https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto.git"
+        },
+        {
+          "key": "mlflow.runName",
+          "value": "embeddings_baseline_simple_sgd_defaults"
+        }
+      ]
+    },
+    "inputs": {},
+    "outputs": {}
+  },
+  {
+    "info": {
+      "run_uuid": "07a4edc93d9340428f5b05d9417d0a15",
+      "experiment_id": "2",
+      "run_name": "tfidf_baseline_simple_sgd_defaults",
+      "user_id": "juan",
+      "status": "FINISHED",
+      "start_time": 1794182364638,
+      "end_time": 1794182367377,
+      "artifact_uri": "/home/ubuntu/despliegue_soluciones_miad_proyecto/mlflow-artifacts/2/07a4edc93d9340428f5b05d9417d0a15/artifacts",
+      "lifecycle_stage": "active",
+      "run_id": "07a4edc93d9340428f5b05d9417d0a15"
+    },
+    "data": {
+      "metrics": [
+        {
+          "key": "validation_f1_micro",
+          "value": 0.48130718954248364,
+          "timestamp": 1794182366339,
+          "step": 0
+        },
+        {
+          "key": "test_f1_micro",
+          "value": 0.47832058073376493,
+          "timestamp": 1794182366532,
+          "step": 0
+        },
+        {
+          "key": "test_f1_macro",
+          "value": 0.3021446079925107,
+          "timestamp": 1794182366732,
+          "step": 0
+        },
+        {
+          "key": "test_precision_micro",
+          "value": 0.4080562374469984,
+          "timestamp": 1794182366935,
+          "step": 0
+        },
+        {
+          "key": "test_recall_micro",
+          "value": 0.5778164006952126,
+          "timestamp": 1794182367187,
+          "step": 0
+        }
+      ],
+      "params": [
+        {
+          "key": "feature_type",
+          "value": "tfidf_unigram_bigram"
+        },
+        {
+          "key": "model_family",
+          "value": "sgd_log_loss"
+        },
+        {
+          "key": "loss",
+          "value": "log_loss"
+        },
+        {
+          "key": "random_state",
+          "value": "42"
+        },
+        {
+          "key": "selected_threshold",
+          "value": "0.1"
+        },
+        {
+          "key": "selection_metric",
+          "value": "validation f1_micro"
+        }
+      ],
+      "tags": [
+        {
+          "key": "mlflow.user",
+          "value": "juan"
+        },
+        {
+          "key": "mlflow.source.name",
+          "value": "ml_app/scripts/p06_multilabel_experiments_mlflow.py"
+        },
+        {
+          "key": "mlflow.source.type",
+          "value": "LOCAL"
+        },
+        {
+          "key": "mlflow.source.git.commit",
+          "value": "4857d924390efd81c8a84013c9604afdcfeb9603"
+        },
+        {
+          "key": "mlflow.source.git.branch",
+          "value": "main"
+        },
+        {
+          "key": "mlflow.source.git.repoURL",
+          "value": "https://github.com/jcamiloparra7/despliegue_soluciones_miad_proyecto.git"
+        },
+        {
+          "key": "mlflow.runName",
+          "value": "tfidf_baseline_simple_sgd_defaults"
+        }
+      ]
+    },
+    "inputs": {},
+    "outputs": {}
+  }
+]
