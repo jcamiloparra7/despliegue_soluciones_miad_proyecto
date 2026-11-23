@@ -1,12 +1,26 @@
-# API skeleton (mock model)
+# API skeleton (winning model for inference)
 
-Este módulo expone un esqueleto de API en FastAPI para clasificación de emociones con un modelo simulado.
+Este módulo expone un servicio FastAPI para clasificación multietiqueta de emociones usando el modelo ganador de P06:
+
+- **Representación:** TF-IDF (unigramas + bigramas)
+- **Modelo:** OneVsRest(Calibrated LinearSVC, C=0.75, cv=3)
+- **Umbral de clasificación:** 0.30
 
 ## Instalación rápida
 
 ```bash
 python3 -m pip install -r ml_app/api/requirements.txt
 ```
+
+## Entrenar y guardar el artefacto del modelo ganador
+
+```bash
+python3 -m ml_app.api.train_winning_model
+```
+
+Por defecto, el artefacto se guarda en:
+
+`ml_app/artifacts/p06/models/winning_tfidf_calibrated_linearsvc_c_0_75.joblib`
 
 ## Ejecución local
 
@@ -30,4 +44,4 @@ uvicorn ml_app.api.main:app --host 0.0.0.0 --port 8000 --reload
 }
 ```
 
-El modelo actual es *mock*: siempre retorna la misma predicción (`neutral`, `approval`) y los mismos puntajes.
+La API retorna `predicted_labels` (clases positivas según umbral con fallback al argmax) y `scores` con probabilidad por emoción.

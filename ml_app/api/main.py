@@ -4,16 +4,16 @@ from __future__ import annotations
 
 from fastapi import FastAPI
 
-from .model import EMOTION_LABELS, MockEmotionModel
+from .model import EMOTION_LABELS, WinningEmotionModel
 from .schemas import HealthResponse, PredictRequest, PredictResponse, PredictionItem
 
 app = FastAPI(
     title="Go Emotions Prediction API",
-    description="Skeleton API with a deterministic mock predictor.",
-    version="0.1.0",
+    description="API for multilabel emotion classification.",
+    version="0.2.0",
 )
 
-mock_model = MockEmotionModel()
+prediction_model = WinningEmotionModel()
 
 
 @app.get("/", tags=["meta"])
@@ -25,8 +25,8 @@ def root() -> dict[str, str]:
 def health() -> HealthResponse:
     return HealthResponse(
         status="ok",
-        model_name=mock_model.model_name,
-        model_version=mock_model.model_version,
+        model_name=prediction_model.model_name,
+        model_version=prediction_model.model_version,
         available_labels=EMOTION_LABELS,
     )
 
@@ -35,7 +35,7 @@ def health() -> HealthResponse:
 def predict(payload: PredictRequest) -> PredictResponse:
     predictions = []
     for text in payload.texts:
-        result = mock_model.predict(text)
+        result = prediction_model.predict(text)
         predictions.append(
             PredictionItem(
                 text=text,
@@ -45,7 +45,7 @@ def predict(payload: PredictRequest) -> PredictResponse:
         )
 
     return PredictResponse(
-        model_name=mock_model.model_name,
-        model_version=mock_model.model_version,
+        model_name=prediction_model.model_name,
+        model_version=prediction_model.model_version,
         predictions=predictions,
     )
