@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run fourteen multilabel experiments and log concise metrics to MLflow."""
+"""Run multilabel experiments and log concise metrics to MLflow."""
 
 from __future__ import annotations
 
@@ -304,6 +304,25 @@ def main() -> None:
             ),
         },
         {
+            "name": "logreg_l2_c_5.0",
+            "model_family": "logistic_regression_l2",
+            "model_params": {
+                "C": 5.0,
+                "solver": "liblinear",
+                "max_iter": 1000,
+                "random_state": 42,
+            },
+            "model_factory": lambda: OneVsRestClassifier(
+                LogisticRegression(
+                    C=5.0,
+                    solver="liblinear",
+                    max_iter=1000,
+                    random_state=42,
+                ),
+                n_jobs=OVR_N_JOBS,
+            ),
+        },
+        {
             "name": "sgd_logloss_alpha_1e-4",
             "model_family": "sgd_log_loss",
             "model_params": {"alpha": 1e-4, "max_iter": 50, "tol": 1e-3, "random_state": 42},
@@ -334,12 +353,39 @@ def main() -> None:
             ),
         },
         {
+            "name": "sgd_logloss_alpha_2e-5",
+            "model_family": "sgd_log_loss",
+            "model_params": {"alpha": 2e-5, "max_iter": 100, "tol": 1e-3, "random_state": 42},
+            "model_factory": lambda: OneVsRestClassifier(
+                SGDClassifier(
+                    loss="log_loss",
+                    alpha=2e-5,
+                    max_iter=100,
+                    tol=1e-3,
+                    random_state=42,
+                ),
+                n_jobs=OVR_N_JOBS,
+            ),
+        },
+        {
             "name": "calibrated_linearsvc_c_1.0",
             "model_family": "calibrated_linear_svc",
             "model_params": {"C": 1.0, "cv": 3, "random_state": 42},
             "model_factory": lambda: OneVsRestClassifier(
                 CalibratedClassifierCV(
                     estimator=LinearSVC(C=1.0, random_state=42),
+                    cv=3,
+                ),
+                n_jobs=OVR_N_JOBS,
+            ),
+        },
+        {
+            "name": "calibrated_linearsvc_c_0.75",
+            "model_family": "calibrated_linear_svc",
+            "model_params": {"C": 0.75, "cv": 3, "random_state": 42},
+            "model_factory": lambda: OneVsRestClassifier(
+                CalibratedClassifierCV(
+                    estimator=LinearSVC(C=0.75, random_state=42),
                     cv=3,
                 ),
                 n_jobs=OVR_N_JOBS,
