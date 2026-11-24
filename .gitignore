@@ -11,3 +11,5 @@ venv/
 
 # Historial local de pruebas del dashboard
 entrega_2/dashboard/data/historial_inferencias.csv
+
+entrega_2/dashboard/data/historial_inferencias_api.csv

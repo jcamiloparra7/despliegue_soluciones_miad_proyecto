@@ -5,6 +5,8 @@ import altair as alt
 from pathlib import Path
 
 import streamlit as st
+import requests
+from api_client import predecir_emociones
 
 # Configuración general
 st.set_page_config(
@@ -61,12 +63,19 @@ def cargar_resultados_modelo():
         PROJECT_ROOT
         / "ml_app"
         / "artifacts"
-        / "p05"
-        / "p05_baseline_results.json"
+        / "p06"
+        / "p06_experiment_results.json"
     )
 
     with open(ruta, "r", encoding="utf-8") as archivo:
-        return json.load(archivo)
+        resultados = json.load(archivo)
+
+    return next(
+        experimento
+        for experimento in resultados["experiments"]
+        if experimento["experiment_name"]
+        == "tfidf_calibrated_linearsvc_c_0.75"
+    )
 
     
 @st.cache_data
@@ -75,29 +84,15 @@ def cargar_desempeno_por_emocion():
         PROJECT_ROOT
         / "ml_app"
         / "artifacts"
-        / "p05"
-        / "p05_per_class_f1_test.csv"
+        / "p06"
+        / "p06_winning_model_per_class_f1_test.csv"
     )
 
     return pd.read_csv(ruta)
 
 
-@st.cache_resource
-def cargar_modelo_emotionai():
-    import joblib
 
-    ruta = (
-        PROJECT_ROOT
-        / "entrega_2"
-        / "dashboard"
-        / "models"
-        / "emotionai_baseline.joblib"
-    )
-
-    return joblib.load(ruta)
-
-
-def registrar_inferencia(texto, emociones, probabilidades, umbral):
+def registrar_inferencia(texto, emociones, probabilidades, modelo, version):
     import csv
     from datetime import datetime
 
@@ -106,41 +101,28 @@ def registrar_inferencia(texto, emociones, probabilidades, umbral):
         / "entrega_2"
         / "dashboard"
         / "data"
-        / "historial_inferencias.csv"
+        / "historial_inferencias_api.csv"
     )
-
-    indices = [
-        i for i, probabilidad in enumerate(probabilidades)
-        if probabilidad >= umbral
-    ]
-
-    if not indices:
-        indices = [int(probabilidades.argmax())]
 
     registro = {
         "fecha_hora": datetime.now().isoformat(timespec="seconds"),
         "texto": texto,
-        "emociones_detectadas": ", ".join(
-            emociones[i] for i in indices
-        ),
-        "probabilidades": json.dumps({
-            emociones[i]: round(float(probabilidades[i]), 6)
-            for i in range(len(emociones))
-        }),
-        "umbral": umbral
+        "emociones_detectadas": ", ".join(emociones),
+        "probabilidades": json.dumps(probabilidades),
+        "modelo": modelo,
+        "version": version
     }
+
     ruta.parent.mkdir(parents=True, exist_ok=True)
-    existe = ruta.exists()
+    existe = ruta.exists() and ruta.stat().st_size > 0
 
     with ruta.open("a", encoding="utf-8", newline="") as archivo:
         escritor = csv.DictWriter(
             archivo,
             fieldnames=registro.keys()
         )
-
         if not existe:
             escritor.writeheader()
-
         escritor.writerow(registro)
 
 
@@ -372,104 +354,111 @@ elif seccion == "Clasificación de emociones":
         type="primary"
     )
 
-
     if clasificar:
         if not texto_usuario.strip():
             st.warning("Ingresa un mensaje antes de analizarlo.")
         else:
-            import numpy as np
+            try:
+                with st.spinner("Consultando la API de EmotionAI..."):
+                    respuesta = predecir_emociones(
+                        texto_usuario.strip()
+                    )
 
-            modelo_emotionai = cargar_modelo_emotionai()
+                prediccion = respuesta["predictions"][0]
+                emociones = prediccion["predicted_labels"]
+                probabilidades = prediccion["scores"]
+                modelo = respuesta["model_name"]
+                version = respuesta["model_version"]
 
-            X = modelo_emotionai["vectorizer"].transform(
-                [texto_usuario.strip()]
-            )
-
-            probabilidades = (
-                modelo_emotionai["model"].predict_proba(X)[0]
-            )
-
-            umbral = modelo_emotionai["threshold"]
-            emociones = modelo_emotionai["emotion_names"]
-
-            indices = np.where(probabilidades >= umbral)[0]
-
-            if len(indices) == 0:
-                indices = [int(np.argmax(probabilidades))]
-
-            indices = sorted(
-                indices,
-                key=lambda i: probabilidades[i],
-                reverse=True
-            )
-
-
-            registrar_inferencia(
-                texto=texto_usuario.strip(),
-                emociones=emociones,
-                probabilidades=probabilidades,
-                umbral=umbral
-            )
-
-
-            st.subheader("Emociones detectadas")
-
-
-            for i in indices:
-                st.write(
-                    f"**{emociones[i]} — {probabilidades[i]:.2%}**"
+            except requests.exceptions.RequestException:
+                st.error(
+                    "No fue posible obtener una respuesta de la API. "
+                    "Verifica la disponibilidad del servicio."
                 )
 
-                st.progress(
-                    float(probabilidades[i])
+            except (KeyError, IndexError, TypeError, ValueError):
+                st.error(
+                    "La API devolvió una respuesta con un formato inesperado."
                 )
 
-            st.caption(
-                "Predicciones del modelo baseline entrenado "
-                "con GoEmotions. Los porcentajes representan "
-                "probabilidades estimadas, no precisión garantizada."
-            )
+            else:
+                st.subheader("Emociones detectadas")
 
+                for emocion in emociones:
+                    probabilidad = probabilidades[emocion]
+                    st.write(
+                        f"**{emocion} — {probabilidad:.2%}**"
+                    )
+                    st.progress(float(probabilidad))
 
-            st.divider()
-            st.subheader("Cinco emociones más probables")
-
-            st.write(
-                "Estas son las cinco emociones con mayor "
-                "probabilidad estimada, independientemente "
-                "de si superan el umbral de clasificación."
-            )
-
-            top_indices = np.argsort(probabilidades)[-5:][::-1]
-
-            for i in top_indices:
-                supera_umbral = probabilidades[i] >= umbral
-
-                estado = (
-                    "Detectada"
-                    if supera_umbral
-                    else "Por debajo del umbral"
+                st.caption(
+                    f"Modelo: {modelo} | Versión: {version}"
                 )
+
+                st.caption(
+                    "Los porcentajes representan probabilidades "
+                    "estimadas, no precisión garantizada."
+                )
+
+                st.divider()
+
+                st.subheader("Cinco emociones más probables")
 
                 st.write(
-                    f"**{emociones[i]} — "
-                    f"{probabilidades[i]:.2%}** "
-                    f"({estado})"
+                    "Estas son las cinco emociones con mayor "
+                    "probabilidad estimada por el modelo."
                 )
 
-                st.progress(float(probabilidades[i]))
+                top_emociones = sorted(
+                    probabilidades.items(),
+                    key=lambda elemento: elemento[1],
+                    reverse=True
+                )[:5]
 
-            st.caption(
-                "Las emociones por debajo del umbral se muestran "
-                "únicamente como información complementaria. "
-                "No constituyen clasificaciones positivas."
-            )
+                for emocion, probabilidad in top_emociones:
+                    estado = (
+                        "Detectada"
+                        if emocion in emociones
+                        else "No detectada"
+                    )
+
+                    st.write(
+                        f"**{emocion} — {probabilidad:.2%}** "
+                        f"({estado})"
+                    )
+
+                    st.progress(float(probabilidad))
+
+                st.caption(
+                    "Las emociones no detectadas se muestran "
+                    "únicamente como información complementaria."
+                )
+
+                try:
+                    registrar_inferencia(
+                        texto=texto_usuario.strip(),
+                        emociones=emociones,
+                        probabilidades=probabilidades,
+                        modelo=modelo,
+                        version=version
+                    )
+                except OSError:
+                    st.warning(
+                        "La predicción fue exitosa, pero no fue "
+                        "posible guardar el registro de auditoría."
+                    )
 
 
 elif seccion == "Desempeño del modelo":
     resultados = cargar_resultados_modelo()
 
-    st.subheader("Indicadores de desempeño del baseline")
+    st.subheader("Indicadores de desempeño del modelo ganador")
+
+    st.caption(
+        "Modelo: TF-IDF + LinearSVC calibrado (C=0.75) | "
+        "Versión: p06-rerun-20261122 | "
+        "Umbral de clasificación: 30 %"
+    )
 
     particion = st.radio(
         "Selecciona el conjunto de evaluación",
@@ -498,11 +487,12 @@ elif seccion == "Desempeño del modelo":
     )
 
     st.caption(
-        "Resultados del modelo baseline OneVsRest "
-        "(SGDClassifier con TF-IDF). "
-        "El umbral de clasificación fue seleccionado "
-        "utilizando F1 Micro en validación."
-    )
+        "Resultados del modelo ganador OneVsRest "
+        "(LinearSVC calibrado con TF-IDF y C=0.75). "
+        "El modelo fue seleccionado entre 20 configuraciones "
+        "evaluadas en MLflow, utilizando F1 Micro en validación "
+        "como criterio principal."
+        )
 
     st.divider()
     st.subheader("Desempeño individual por emoción")
@@ -555,27 +545,24 @@ elif seccion == "Desempeño del modelo":
 
     st.altair_chart(grafica_f1, width="stretch")
 
-    emociones_f1_cero = desempeno[
-        desempeno["f1_test"] == 0
-    ]
+    emociones_criticas = desempeno.nsmallest(5, "f1_test")
 
-    if not emociones_f1_cero.empty:
+    if not emociones_criticas.empty:
         nombres = ", ".join(
-            emociones_f1_cero["emotion"].tolist()
+            emociones_criticas["emotion"].tolist()
         )
 
         st.warning(
-            f"Emociones con F1 igual a cero: {nombres}. "
-            "El modelo no logró identificar correctamente "
-            "casos positivos de estas emociones en el conjunto "
-            "de prueba. Este resultado requiere analizar "
-            "la cantidad de ejemplos y las predicciones realizadas."
+            f"Emociones con menor F1: {nombres}. "
+            "Estas categorías presentan mayores dificultades "
+            "de clasificación y requieren especial atención "
+            "al interpretar las predicciones del modelo."
         )
 
 
-    st.subheader("Análisis de emociones con F1 igual a cero")
+    st.subheader("Análisis de las cinco emociones con menor F1")
 
-    tabla_criticas = emociones_f1_cero[
+    tabla_criticas = emociones_criticas[
         [
             "emotion",
             "support_test",
@@ -618,11 +605,12 @@ elif seccion == "Desempeño del modelo":
         el desempeño agregado no representa por igual todas
         las emociones.
 
-        **Implicación para EmotionAI:** emociones como *grief*
-        y *nervousness* requieren especial atención, porque
-        las dificultades para identificarlas podrían limitar
-        la utilidad del modelo en determinados escenarios
-        de atención al cliente.
+        **Implicación para EmotionAI:** emociones como *disappointment*,
+        *annoyance* y *disapproval* presentan un bajo desempeño.
+        Esta limitación es especialmente relevante en escenarios
+        de atención al cliente, donde identificar señales de
+        insatisfacción puede contribuir a orientar la respuesta
+        del chatbot.
 
         Estos resultados corresponden a una evaluación
         académica sobre GoEmotions y no constituyen
@@ -633,8 +621,8 @@ elif seccion == "Desempeño del modelo":
 
 
     st.caption(
-        "Fuente: evaluación del baseline en el conjunto de prueba. "
-        "Las emociones con F1 igual a cero se identifican en rojo. "
+        "Fuente: evaluación del modelo ganador en el conjunto de prueba de GoEmotions. "
+        "Ninguna de las 28 emociones presenta un F1 igual a cero. "
         "Los resultados no corresponden a monitoreo en producción."
     )
 
@@ -651,7 +639,7 @@ elif seccion == "Monitoreo y auditoría":
         / "entrega_2"
         / "dashboard"
         / "data"
-        / "historial_inferencias.csv"
+        / "historial_inferencias_api.csv"
     )
 
     if ruta_historial.exists():
@@ -668,7 +656,8 @@ elif seccion == "Monitoreo y auditoría":
                     "fecha_hora",
                     "texto",
                     "emociones_detectadas",
-                    "umbral"
+                    "modelo",
+                    "version"
                 ]
             ],
             width="stretch",
@@ -742,27 +731,18 @@ elif seccion == "Monitoreo y auditoría":
             .properties(height=650)
         )
 
-        linea_umbral = (
-    alt.Chart(pd.DataFrame({"Umbral": [0.2]}))
-    .mark_rule(
-        color="#C0392B",
-        strokeDash=[6, 4],
-        strokeWidth=2
-    )
-    .encode(x="Umbral:Q")
-)
+
 
         st.altair_chart(
-            grafica_auditoria + linea_umbral,
+            grafica_auditoria,
             width="stretch"
         )
 
-        st.caption("Línea roja punteada: umbral de clasificación del 20 %.")
-
         st.caption(
-            "Probabilidades estimadas para las 28 emociones. "
-            "La clasificación utiliza el umbral registrado "
-            "para cada inferencia."
+            "Probabilidades estimadas para las 28 emociones, "
+            "obtenidas directamente de la API de EmotionAI. "
+            "Las emociones detectadas corresponden a la "
+            "clasificación realizada por el modelo desplegado."
         )
 
         conteo_emociones.columns = ["Emoción", "Frecuencia"]

@@ -45,3 +45,57 @@ Este notebook integra:
    - `entrega_1/artifacts/p02/`
    - `entrega_1/artifacts/p04/`
    - `entrega_1/artifacts/p05/`
+
+## Dashboard EmotionAI — Integración con la API
+
+El dashboard de Streamlit consume la API de clasificación de emociones
+desplegada en AWS, utilizando el modelo ganador seleccionado mediante
+los experimentos registrados en MLflow.
+
+### Ejecución local
+
+Desde la raíz del repositorio, con el entorno virtual activo:
+
+```bash
+pip install -r requirements.txt
+```
+
+Configurar la dirección de la API:
+
+```bash
+export EMOTIONAI_API_URL="http://54.210.54.7:8000"
+```
+
+Ejecutar el dashboard:
+
+```bash
+streamlit run entrega_2/dashboard/app.py
+```
+
+Acceder desde el navegador a http://localhost:8501.
+
+La API debe estar disponible. Si cambia la dirección IP de AWS,
+se debe actualizar la variable EMOTIONAI_API_URL.
+
+### Funcionalidades
+
+- Exploración del conjunto de datos GoEmotions.
+- Clasificación de emociones mediante la API.
+- Visualización del desempeño del modelo ganador.
+- Monitoreo y auditoría de inferencias.
+
+### Modelo desplegado y validado
+
+- Modelo: TF-IDF + LinearSVC calibrado (C=0.75).
+- Versión: p06-rerun-20261122.
+- Clasificación multietiqueta de 28 emociones.
+- F1 Micro en prueba: 0.5578.
+- F1 Macro en prueba: 0.4252.
+
+### Trazabilidad
+
+Las inferencias exitosas se almacenan localmente en
+`entrega_2/dashboard/data/historial_inferencias_api.csv`.
+
+Este archivo está excluido del control de versiones para evitar
+la publicación de los mensajes analizados.
