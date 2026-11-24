@@ -99,3 +99,56 @@ Las inferencias exitosas se almacenan localmente en
 
 Este archivo está excluido del control de versiones para evitar
 la publicación de los mensajes analizados.
+
+### Despliegue del dashboard con Docker en AWS
+
+El dashboard se ejecuta en un contenedor Docker independiente,
+alojado en la misma instancia EC2 que la API de clasificación.
+
+Desde la raíz del repositorio, construir la imagen:
+
+```bash
+sudo docker build -f entrega_2/dashboard/Dockerfile -t emotionai-dashboard:1.0 .
+```
+
+Iniciar el contenedor:
+
+```bash
+sudo docker run -d \
+  --name emotionai-dashboard \
+  -p 8501:8501 \
+  -e EMOTIONAI_API_URL=http://54.210.54.7:8000 \
+  --restart unless-stopped \
+  emotionai-dashboard:1.0
+```
+
+Verificar el estado del contenedor:
+
+```bash
+sudo docker ps --filter name=emotionai-dashboard
+curl --fail http://localhost:8501/_stcore/health
+```
+
+Direcciones de acceso:
+
+- Dashboard: http://54.210.54.7:8501
+- API: http://54.210.54.7:8000
+- Documentación de la API: http://54.210.54.7:8000/docs
+
+El acceso al dashboard requiere autorización del puerto TCP 8501
+en el grupo de seguridad de EC2. Actualmente está restringido
+a la dirección IP autorizada para las pruebas.
+
+La imagen utiliza Python 3.13 e incluye únicamente las dependencias
+y los archivos de datos requeridos por el dashboard.
+
+Se validaron satisfactoriamente los cuatro módulos en AWS,
+incluyendo la clasificación mediante la API y el registro de
+inferencias dentro del contenedor.
+
+El historial se conserva mientras exista el contenedor.
+Para garantizar su persistencia al reemplazarlo, se requiere
+configurar un volumen de Docker.
+
+Si cambia la IP pública de EC2, se deben actualizar las
+direcciones de acceso y la variable EMOTIONAI_API_URL.
