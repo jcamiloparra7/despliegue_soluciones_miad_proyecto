@@ -28,6 +28,15 @@ Por defecto, el artefacto se guarda en:
 uvicorn ml_app.api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
+## Ejecución con Docker
+
+Desde la raíz del repositorio:
+
+```bash
+docker build -f ml_app/api/Dockerfile -t emotionai-api .
+docker run --rm -p 8000:8000 emotionai-api
+```
+
 ## Endpoints
 
 - `GET /health`: estado del servicio y metadatos del modelo.
